@@ -62,21 +62,28 @@ void setup()
 	while (WiFi.status() != WL_CONNECTED) {
 		digitalWrite(D4, LOW);
 		delay(125);
-		digitalWrite(D4, HIGH);
-		delay(125);
-		digitalWrite(D4, LOW);
-		delay(125);
-		digitalWrite(D4, HIGH);
-		delay(125);
-		digitalWrite(D4, LOW);
-		delay(125);
-		digitalWrite(D4, HIGH);
-		delay(125);
-		digitalWrite(D4, LOW);
-		delay(125);
-		digitalWrite(D4, HIGH);
 	}
-
+	digitalWrite(D4, LOW);
+	delay(125);
+	digitalWrite(D4, HIGH);
+	delay(125);
+	digitalWrite(D4, LOW);
+	delay(125);
+	digitalWrite(D4, HIGH);
+	delay(125);
+	digitalWrite(D4, LOW);
+	delay(125);
+	digitalWrite(D4, HIGH);
+	delay(125);
+	digitalWrite(D4, HIGH);
+	delay(125);
+	digitalWrite(D4, LOW);
+	delay(125);
+	digitalWrite(D4, HIGH);
+	delay(125);
+	digitalWrite(D4, LOW);
+	delay(125);
+	digitalWrite(D4, HIGH);
 	// Start the server
 	server.begin();
 	Serial.println("Server started");
