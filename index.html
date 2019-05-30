@@ -1,6 +1,4 @@
-﻿<!--  FUCK YOU -->
-
-<!doctype html>
+﻿<!doctype html>
 <!-- test -->
 <html lang="en">
 <head>
@@ -14,58 +12,32 @@
     <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.5/radial/gauge.min.js"></script>
 
     <script>
-        function loadIt() {
-            $.getJSON("/data.json", function (data) {
-                //$("#dTemp").html("Temp: " + data.Temp + " F");
-                
-
-                gauges[0].value = data.Temp;
-                //$("#tempGauge").attr('value', data.Temp);
-                //$("#dWind").html("Wind: " + data.Wind + " mph");
-                gauges[1].value = (data.Wind).toFixed(1);
-                $("#dWater").html("Water:" + data.Water + " Inches");
-                $("#dPump").html("Cooler Pump:" + data.Pump);
-                $("#dFan").html("Cooler Fan:" + data.Fan);
-                $("#dThermo").html("Thermo:" + data.Thermostat);
-
-                if (data.Led == true) {
-                    $("#bLed").addClass("btn-success");
-                } else {
-                    $("#bLed").removeClass("btn-success");
-                }
-
-                $("#dRaw").html(data);
-                console.log(data);
-            });
-        }
-
         function openButton() {
-            console.log("Trying to change");
-            $.get("/ToggleLed", function (data) {
-                loadIt();
-                console.log("Changed?");
+            console.log("Trying to Open");
+            $.get("/Open", function (data) {
             });
         }
         function closeButton() {
-            console.log("Trying to change");
-            $.get("/ToggleLed", function (data) {
-                loadIt();
-                console.log("Changed?");
+            console.log("Trying to Close");
+            $.get("/Close", function (data) {
             });
         }
         function cycleButton() {
-            console.log("Trying to change");
+            console.log("Trying to Cycle");
             $.get("/Cycle", function (data) {
-                loadIt();
-                console.log("Changed?");
+            });
+        }
+        function danceButton() {
+            console.log("Trying to Dance");
+            $.get("/Dance", function (data) {
             });
         }
 
         $(document).ready(function () {
-            loadIt();
-            $("#bCycle").click(toggleButton);
-            $("#bOpen").click(toggleButton);
-            $("#bClose").click(toggleButton);
+            $("#bCycle").click(cycleButton);
+            $("#bOpen").click(openButton);
+            $("#bClose").click(closeButton);
+            $("#bDance").click(danceButton);
         });
 
        
@@ -87,6 +59,9 @@
                 </div>
                 <div class="col" id="dWater">
                     <button type="button" class="btn" id="bClose">Close Feed Tube</button>
+                </div>
+                <div class="col" id="dfWater">
+                    <button type="button" class="btn" id="bDance">Cmon now lets Dance!</button>
                 </div>
             </div>
         </div>
