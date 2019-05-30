@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿<!--  FUCK YOU -->
+
+<!doctype html>
 <!-- test -->
 <html lang="en">
 <head>
@@ -37,9 +39,23 @@
             });
         }
 
-        function toggleButton() {
+        function openButton() {
             console.log("Trying to change");
             $.get("/ToggleLed", function (data) {
+                loadIt();
+                console.log("Changed?");
+            });
+        }
+        function closeButton() {
+            console.log("Trying to change");
+            $.get("/ToggleLed", function (data) {
+                loadIt();
+                console.log("Changed?");
+            });
+        }
+        function cycleButton() {
+            console.log("Trying to change");
+            $.get("/Cycle", function (data) {
                 loadIt();
                 console.log("Changed?");
             });
@@ -47,89 +63,34 @@
 
         $(document).ready(function () {
             loadIt();
-            $("#bLed").click(toggleButton);
+            $("#bCycle").click(toggleButton);
+            $("#bOpen").click(toggleButton);
+            $("#bClose").click(toggleButton);
         });
 
-        setInterval(loadIt, 5000);
+       
     </script>
-
 </head>
+
 <!-- test -->
 <body>   
     <div class="container">
         <div class="jumbotron">
-            <h1>CRW Water Monitoring</h1>
+            <h1>Jordan - Pig Feeding Beast</h1>
+            <h2>I like pig shit</h2>
             <div class="row">
                 <div class="col" id="dTemp">
-                    <canvas id="tempGauge"
-                            data-type="radial-gauge"
-                            data-width="300"
-                            data-height="300"
-                            data-units="Temp F"
-                            data-min-value="-40"
-                            data-max-value="120"
-                            data-valueDec="1" 
-                            data-major-ticks="-40,-20,0,20,40,60,80,100,120"
-                            data-minor-ticks="2"
-                            data-stroke-ticks="true"
-                            data-highlights='[
-        {"from": 80, "to": 120, "color": "rgba(200, 50, 50, .75)"},
-        {"from": -20, "to": 50, "color": "rgba(50, 50,200, .75)"}
-
-    ]'
-                            data-color-plate="#fff"
-                            data-border-shadow-width="0"
-                            data-borders="false"
-                            data-needle-type="arrow"
-                            data-needle-width="2"
-                            data-needle-circle-size="7"
-                            data-needle-circle-outer="true"
-                            data-needle-circle-inner="false"
-                            data-animation-duration="1500"
-                            data-animation-rule="linear">
-                        </canvas>
+                    <button type="button" class="btn" id="bCycle">Cycle Feeder</button>
                 </div>
                 <div class="col" id="dWind">
-                    <canvas id="windGauge"
-                            data-type="radial-gauge"
-                            data-width="300"
-                            data-height="300"
-                            data-units="Wind mph"
-                            data-min-value="0"
-                            data-max-value="180"
-                            data-valueDec="1" 
-                            data-major-ticks="0,20,40,60,80,100,120,140,160,180"
-                            data-minor-ticks="5"
-                            data-stroke-ticks="true"
-                            data-highlights='[
-        {"from": 40, "to": 80, "color": "rgba(200, 50, 50, .25)"},
-        {"from": 80, "to": 110, "color": "rgba(200, 50,50, .50)"},
-        {"from": 110, "to": 180, "color": "rgba(200, 50,50, .75)"
-                            }]'
-                            data-color-plate="#fff"
-                            data-border-shadow-width="0"
-                            data-borders="false"
-                            data-needle-type="arrow"
-                            data-needle-width="2"
-                            data-needle-circle-size="7"
-                            data-needle-circle-outer="true"
-                            data-needle-circle-inner="false"
-                            data-animation-duration="1500"
-                            data-animation-rule="linear"></canvas></div>
-                <div class="col" id="dWater">Water</div>
-            </div>
-            <div class="row">
-                <div class="col" id="dPump">Pump</div>
-                <div class="col" id="dFan">Fan</div>
-                <div class="col" id="dThermo">Thermo</div>
+                    <button type="button" class="btn" id="bOpen">Open Feed Tube</button>
+                </div>
+                <div class="col" id="dWater">
+                    <button type="button" class="btn" id="bClose">Close Feed Tube</button>
+                </div>
             </div>
         </div>
-        <br><br>
-        <div>Toggle the LED</div>
-
-        <button type="button" class="btn" id="bLed">LED</button>
-        <br/>
-        <div id="dRaw"></div>
+        <br>
     </div>
 </body>
 </html>
