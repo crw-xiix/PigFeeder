@@ -17310,7 +17310,7 @@ END GROUP
                 0x40106dcc                _text_end = ABSOLUTE (.)
                 0x40106dcc                _etext = .
 
-.rodata         0x3ffe85f0     0x1c3c
+.rodata         0x3ffe85f0     0x1c48
                 0x3ffe85f0                _rodata_start = ABSOLUTE (.)
  *(.sdk.version)
  .sdk.version   0x3ffe85f0        0xf C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libmain.a(app_main.o)
@@ -17346,75 +17346,75 @@ END GROUP
                 0x3ffe8a5c       0x13 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\nettime.cpp.o
  *fill*         0x3ffe8a6f        0x1 
  .rodata.str1.4
-                0x3ffe8a70     0x11a0 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\output.cpp.o
-                               0x11e8 (size before relaxing)
+                0x3ffe8a70     0x11ac C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\output.cpp.o
+                               0x11f4 (size before relaxing)
  .rodata.str1.4
-                0x3ffe9c10       0x2a C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\Task.cpp.o
- *fill*         0x3ffe9c3a        0x2 
+                0x3ffe9c1c       0x2a C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\Task.cpp.o
+ *fill*         0x3ffe9c46        0x2 
  .rodata.CSWTCH$87
-                0x3ffe9c3c        0x6 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiSTA.cpp.o
- *fill*         0x3ffe9c42        0x2 
+                0x3ffe9c48        0x6 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiSTA.cpp.o
+ *fill*         0x3ffe9c4e        0x2 
  .rodata._ZZN24BufferedStreamDataSourceI13ProgmemStreamE14release_bufferEPKhjE19__PRETTY_FUNCTION__
-                0x3ffe9c44       0x9e C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
- *fill*         0x3ffe9ce2        0x2 
+                0x3ffe9c50       0x9e C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
+ *fill*         0x3ffe9cee        0x2 
  .rodata._ZZN24BufferedStreamDataSourceI13ProgmemStreamE10get_bufferEjE19__PRETTY_FUNCTION__
-                0x3ffe9ce4       0x94 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
+                0x3ffe9cf0       0x94 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
  .rodata._ZZN13ClientContext18_write_from_sourceEP10DataSourceE19__PRETTY_FUNCTION__
-                0x3ffe9d78       0x36 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
- *fill*         0x3ffe9dae        0x2 
+                0x3ffe9d84       0x36 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
+ *fill*         0x3ffe9dba        0x2 
  .rodata._ZZN13ClientContext10_connectedEP7tcp_pcblE19__PRETTY_FUNCTION__
-                0x3ffe9db0       0x31 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
- *fill*         0x3ffe9de1        0x3 
+                0x3ffe9dbc       0x31 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
+ *fill*         0x3ffe9ded        0x3 
  .rodata._ZZN16BufferDataSource14release_bufferEPKhjE19__PRETTY_FUNCTION__
-                0x3ffe9de4       0x46 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
- *fill*         0x3ffe9e2a        0x2 
+                0x3ffe9df0       0x46 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
+ *fill*         0x3ffe9e36        0x2 
  .rodata._ZZN16BufferDataSource10get_bufferEjE19__PRETTY_FUNCTION__
-                0x3ffe9e2c       0x3c C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
+                0x3ffe9e38       0x3c C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClient.cpp.o
  .rodata.str1.4
-                0x3ffe9e68       0x23 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_postmortem.c.o)
- *fill*         0x3ffe9e8b        0x1 
+                0x3ffe9e74       0x23 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_postmortem.c.o)
+ *fill*         0x3ffe9e97        0x1 
  .rodata.str1.4
-                0x3ffe9e8c       0x67 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(abi.cpp.o)
- *fill*         0x3ffe9ef3        0x1 
+                0x3ffe9e98       0x67 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(abi.cpp.o)
+ *fill*         0x3ffe9eff        0x1 
  .rodata._ZZSt25__throw_bad_function_callvE8__func__
-                0x3ffe9ef4       0x1a C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(abi.cpp.o)
- *fill*         0x3ffe9f0e        0x2 
+                0x3ffe9f00       0x1a C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(abi.cpp.o)
+ *fill*         0x3ffe9f1a        0x2 
  .rodata._ZZ18__cxa_pure_virtualE8__func__
-                0x3ffe9f10       0x13 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(abi.cpp.o)
- *fill*         0x3ffe9f23        0x1 
+                0x3ffe9f1c       0x13 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(abi.cpp.o)
+ *fill*         0x3ffe9f2f        0x1 
  .rodata.str1.4
-                0x3ffe9f24       0x7e C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_main.cpp.o)
- *fill*         0x3ffe9fa2        0x2 
- .rodata._ZZL9loop_taskP11ETSEventTagE8__func__
-                0x3ffe9fa4        0xa C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_main.cpp.o)
+                0x3ffe9f30       0x7e C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_main.cpp.o)
  *fill*         0x3ffe9fae        0x2 
+ .rodata._ZZL9loop_taskP11ETSEventTagE8__func__
+                0x3ffe9fb0        0xa C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_main.cpp.o)
+ *fill*         0x3ffe9fba        0x2 
  .rodata._ZZ7__yieldE8__func__
-                0x3ffe9fb0        0x8 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_main.cpp.o)
+                0x3ffe9fbc        0x8 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(core_esp8266_main.cpp.o)
  .rodata.str1.4
-                0x3ffe9fb8       0x12 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Print.cpp.o)
+                0x3ffe9fc4       0x12 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Print.cpp.o)
  .rodata.str1.4
                 0x00000000        0x1 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Stream.cpp.o)
- *fill*         0x3ffe9fca        0x2 
+ *fill*         0x3ffe9fd6        0x2 
  .rodata.str1.4
-                0x3ffe9fcc       0x28 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Updater.cpp.o)
+                0x3ffe9fd8       0x28 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Updater.cpp.o)
                                  0x2c (size before relaxing)
  .rodata.str1.4
-                0x3ffe9ff4        0xc C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pm_for_bcn_only_mode.o)
+                0x3ffea000        0xc C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pm_for_bcn_only_mode.o)
  .rodata.str1.4
-                0x3ffea000        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pp.o)
+                0x3ffea00c        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pp.o)
                                  0x10 (size before relaxing)
  .rodata.str1.4
-                0x3ffea004        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(wdev.o)
+                0x3ffea010        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(wdev.o)
                                   0xc (size before relaxing)
  .rodata.str1.4
-                0x3ffea008        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(lmac.o)
+                0x3ffea014        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(lmac.o)
                                   0xc (size before relaxing)
  .rodata.str1.4
-                0x3ffea00c        0x3 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pm.o)
+                0x3ffea018        0x3 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pm.o)
                                   0xb (size before relaxing)
- *fill*         0x3ffea00f        0x1 
+ *fill*         0x3ffea01b        0x1 
  .rodata.str1.4
-                0x3ffea010        0x3 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libnet80211.a(ieee80211_hostap.o)
+                0x3ffea01c        0x3 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libnet80211.a(ieee80211_hostap.o)
                                   0x8 (size before relaxing)
  .rodata.str1.4
                 0x00000000        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libnet80211.a(ieee80211_sta.o)
@@ -17424,168 +17424,168 @@ END GROUP
                 0x00000000        0x0 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
                                   0x1 (size before relaxing)
  .rodata.CSWTCH$17
-                0x3ffea013       0x10 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
+                0x3ffea01f       0x10 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
  .rodata.CSWTCH$15
-                0x3ffea023       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
+                0x3ffea02f       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
  .rodata.ethbroadcast
-                0x3ffea034        0x6 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
-                0x3ffea034                ethbroadcast
+                0x3ffea040        0x6 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-esp.o)
+                0x3ffea040                ethbroadcast
  .rodata.CSWTCH$11
-                0x3ffea03a       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-git.o)
+                0x3ffea046       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-git.o)
  .rodata.CSWTCH$9
-                0x3ffea04b       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-git.o)
+                0x3ffea057       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(lwip-git.o)
  .rodata.str1.1
-                0x3ffea05c       0x29 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(esp-dhcpserver.o)
+                0x3ffea068       0x29 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(esp-dhcpserver.o)
  .rodata.ethzero
-                0x3ffea085        0x6 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ethernet.o)
-                0x3ffea085                ethzero
+                0x3ffea091        0x6 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ethernet.o)
+                0x3ffea091                ethzero
  .rodata.ethbroadcast_LWIP2
-                0x3ffea08b        0x6 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ethernet.o)
-                0x3ffea08b                ethbroadcast_LWIP2
- *fill*         0x3ffea091        0x3 
+                0x3ffea097        0x6 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ethernet.o)
+                0x3ffea097                ethbroadcast_LWIP2
+ *fill*         0x3ffea09d        0x3 
  .rodata.memp_pools
-                0x3ffea094       0x28 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea094                memp_pools
+                0x3ffea0a0       0x28 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0a0                memp_pools
  .rodata.memp_PBUF_POOL
-                0x3ffea0bc        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0bc                memp_PBUF_POOL
- .rodata.memp_PBUF
-                0x3ffea0be        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0be                memp_PBUF
- .rodata.memp_SYS_TIMEOUT
-                0x3ffea0c0        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0c0                memp_SYS_TIMEOUT
- .rodata.memp_IGMP_GROUP
-                0x3ffea0c2        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0c2                memp_IGMP_GROUP
- .rodata.memp_ARP_QUEUE
-                0x3ffea0c4        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0c4                memp_ARP_QUEUE
- .rodata.memp_TCP_SEG
-                0x3ffea0c6        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0c6                memp_TCP_SEG
- .rodata.memp_TCP_PCB_LISTEN
                 0x3ffea0c8        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0c8                memp_TCP_PCB_LISTEN
- .rodata.memp_TCP_PCB
+                0x3ffea0c8                memp_PBUF_POOL
+ .rodata.memp_PBUF
                 0x3ffea0ca        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0ca                memp_TCP_PCB
- .rodata.memp_UDP_PCB
+                0x3ffea0ca                memp_PBUF
+ .rodata.memp_SYS_TIMEOUT
                 0x3ffea0cc        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0cc                memp_UDP_PCB
- .rodata.memp_RAW_PCB
+                0x3ffea0cc                memp_SYS_TIMEOUT
+ .rodata.memp_IGMP_GROUP
                 0x3ffea0ce        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
-                0x3ffea0ce                memp_RAW_PCB
+                0x3ffea0ce                memp_IGMP_GROUP
+ .rodata.memp_ARP_QUEUE
+                0x3ffea0d0        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0d0                memp_ARP_QUEUE
+ .rodata.memp_TCP_SEG
+                0x3ffea0d2        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0d2                memp_TCP_SEG
+ .rodata.memp_TCP_PCB_LISTEN
+                0x3ffea0d4        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0d4                memp_TCP_PCB_LISTEN
+ .rodata.memp_TCP_PCB
+                0x3ffea0d6        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0d6                memp_TCP_PCB
+ .rodata.memp_UDP_PCB
+                0x3ffea0d8        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0d8                memp_UDP_PCB
+ .rodata.memp_RAW_PCB
+                0x3ffea0da        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(memp.o)
+                0x3ffea0da                memp_RAW_PCB
  .rodata.tcp_pcb_lists
-                0x3ffea0d0       0x10 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp.o)
-                0x3ffea0d0                tcp_pcb_lists
+                0x3ffea0dc       0x10 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp.o)
+                0x3ffea0dc                tcp_pcb_lists
  .rodata.tcp_persist_backoff
-                0x3ffea0e0        0x7 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp.o)
+                0x3ffea0ec        0x7 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp.o)
  .rodata.tcp_backoff
-                0x3ffea0e7        0xd C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp.o)
+                0x3ffea0f3        0xd C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp.o)
  .rodata.lwip_cyclic_timers
-                0x3ffea0f4       0x30 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(timeouts.o)
-                0x3ffea0f4                lwip_cyclic_timers
+                0x3ffea100       0x30 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(timeouts.o)
+                0x3ffea100                lwip_cyclic_timers
  .rodata.str1.1
-                0x3ffea124        0x7 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(dns.o)
- *fill*         0x3ffea12b        0x1 
+                0x3ffea130        0x7 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(dns.o)
+ *fill*         0x3ffea137        0x1 
  .rodata.dns_mquery_v4group
-                0x3ffea12c        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(dns.o)
-                0x3ffea12c                dns_mquery_v4group
+                0x3ffea138        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(dns.o)
+                0x3ffea138                dns_mquery_v4group
  .rodata.tcp_input
-                0x3ffea130       0x20 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp_in.o)
+                0x3ffea13c       0x20 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(tcp_in.o)
  .rodata.pbuf_alloc_LWIP2
-                0x3ffea150       0x14 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(pbuf.o)
+                0x3ffea15c       0x14 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(pbuf.o)
  .rodata.dhcp_discover_request_options
-                0x3ffea164        0x5 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(dhcp.o)
- *fill*         0x3ffea169        0x3 
+                0x3ffea170        0x5 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(dhcp.o)
+ *fill*         0x3ffea175        0x3 
  .rodata.ip_addr_broadcast
-                0x3ffea16c        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ip4_addr.o)
-                0x3ffea16c                ip_addr_broadcast
+                0x3ffea178        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ip4_addr.o)
+                0x3ffea178                ip_addr_broadcast
  .rodata.ip_addr_any
-                0x3ffea170        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ip4_addr.o)
-                0x3ffea170                ip_addr_any
+                0x3ffea17c        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\liblwip2.a(ip4_addr.o)
+                0x3ffea17c                ip_addr_any
  .rodata.str1.4
-                0x3ffea174        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libmain.a(app_main.o)
+                0x3ffea180        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libmain.a(app_main.o)
                                   0xc (size before relaxing)
  .rodata.str1.4
-                0x3ffea178        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libmain.a(ets_timer.o)
+                0x3ffea184        0x4 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libmain.a(ets_timer.o)
                                   0xc (size before relaxing)
  .rodata.str1.1
-                0x3ffea17c        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-impure.o)
+                0x3ffea188        0x2 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-impure.o)
  .rodata.str1.1
-                0x3ffea17e       0x12 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfprintf_float.o)
+                0x3ffea18a       0x12 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfprintf_float.o)
  .rodata.str1.1
-                0x3ffea190       0x22 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfprintf_i.o)
+                0x3ffea19c       0x22 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfprintf_i.o)
  .rodata.str1.1
-                0x3ffea1b2        0x5 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfscanf_float.o)
+                0x3ffea1be        0x5 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfscanf_float.o)
  .rodata.str1.1
                 0x00000000        0x5 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-strtod.o)
                                   0xc (size before relaxing)
  .rodata.str1.1
-                0x3ffea1b7        0xd C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-dtoa.o)
+                0x3ffea1c3        0xd C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-dtoa.o)
                                   0xf (size before relaxing)
  .rodata.str1.1
-                0x3ffea1c4        0x8 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-locale.o)
+                0x3ffea1d0        0x8 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-locale.o)
                                   0xb (size before relaxing)
  .rodata.str1.1
-                0x3ffea1cc       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-svfprintf.o)
+                0x3ffea1d8       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-svfprintf.o)
  .rodata.str1.1
                 0x00000000       0x11 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/lib\libc.a(lib_a-nano-vfprintf.o)
  *(.gnu.linkonce.r.*)
  *(.rodata1)
-                0x3ffea1dd                __XT_EXCEPTION_TABLE__ = ABSOLUTE (.)
+                0x3ffea1e9                __XT_EXCEPTION_TABLE__ = ABSOLUTE (.)
  *(.xt_except_table)
  *(.gcc_except_table)
  *(.gnu.linkonce.e.*)
  *(.gnu.version_r)
  *(.eh_frame)
-                0x3ffea1e0                . = ((. + 0x3) & 0xfffffffc)
- *fill*         0x3ffea1dd        0x3 
-                0x3ffea1e0                __init_array_start = ABSOLUTE (.)
+                0x3ffea1ec                . = ((. + 0x3) & 0xfffffffc)
+ *fill*         0x3ffea1e9        0x3 
+                0x3ffea1ec                __init_array_start = ABSOLUTE (.)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
- .ctors         0x3ffea1e0        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\PigFeeder.cpp.o
- .ctors         0x3ffea1e4        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\nettime.cpp.o
- .ctors         0x3ffea1e8        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFi.cpp.o
- .ctors         0x3ffea1ec        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiGeneric.cpp.o
- .ctors         0x3ffea1f0        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiScan.cpp.o
- .ctors         0x3ffea1f4        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClientSecureBearSSL.cpp.o
- .ctors         0x3ffea1f8        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(HardwareSerial.cpp.o)
- .ctors         0x3ffea1fc        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(IPAddress.cpp.o)
- .ctors         0x3ffea200        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(ScheduledFunctions.cpp.o)
- .ctors         0x3ffea204        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Updater.cpp.o)
+ .ctors         0x3ffea1ec        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\PigFeeder.cpp.o
+ .ctors         0x3ffea1f0        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\nettime.cpp.o
+ .ctors         0x3ffea1f4        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFi.cpp.o
+ .ctors         0x3ffea1f8        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiGeneric.cpp.o
+ .ctors         0x3ffea1fc        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiScan.cpp.o
+ .ctors         0x3ffea200        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClientSecureBearSSL.cpp.o
+ .ctors         0x3ffea204        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(HardwareSerial.cpp.o)
+ .ctors         0x3ffea208        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(IPAddress.cpp.o)
+ .ctors         0x3ffea20c        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(ScheduledFunctions.cpp.o)
+ .ctors         0x3ffea210        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Updater.cpp.o)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x3ffea208                __init_array_end = ABSOLUTE (.)
+                0x3ffea214                __init_array_end = ABSOLUTE (.)
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
- .dtors         0x3ffea208        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\PigFeeder.cpp.o
- .dtors         0x3ffea20c        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiGeneric.cpp.o
- .dtors         0x3ffea210        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiScan.cpp.o
- .dtors         0x3ffea214        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClientSecureBearSSL.cpp.o
- .dtors         0x3ffea218        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(HardwareSerial.cpp.o)
- .dtors         0x3ffea21c        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(ScheduledFunctions.cpp.o)
- .dtors         0x3ffea220        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Updater.cpp.o)
+ .dtors         0x3ffea214        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\PigFeeder.cpp.o
+ .dtors         0x3ffea218        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiGeneric.cpp.o
+ .dtors         0x3ffea21c        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\ESP8266WiFiScan.cpp.o
+ .dtors         0x3ffea220        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ESP8266WiFi\WiFiClientSecureBearSSL.cpp.o
+ .dtors         0x3ffea224        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(HardwareSerial.cpp.o)
+ .dtors         0x3ffea228        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(ScheduledFunctions.cpp.o)
+ .dtors         0x3ffea22c        0x4 C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release/core.a(Updater.cpp.o)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x3ffea224                __XT_EXCEPTION_DESCS__ = ABSOLUTE (.)
+                0x3ffea230                __XT_EXCEPTION_DESCS__ = ABSOLUTE (.)
  *(.xt_except_desc)
  *(.gnu.linkonce.h.*)
-                0x3ffea224                __XT_EXCEPTION_DESCS_END__ = ABSOLUTE (.)
+                0x3ffea230                __XT_EXCEPTION_DESCS_END__ = ABSOLUTE (.)
  *(.xt_except_desc_end)
  *(.dynamic)
  *(.gnu.version_d)
-                0x3ffea224                . = ALIGN (0x4)
-                0x3ffea224                _bss_table_start = ABSOLUTE (.)
-                0x3ffea224        0x4 LONG 0x3ffea230 _bss_start
-                0x3ffea228        0x4 LONG 0x3fff04c0 _bss_end
-                0x3ffea22c                _bss_table_end = ABSOLUTE (.)
-                0x3ffea22c                _rodata_end = ABSOLUTE (.)
+                0x3ffea230                . = ALIGN (0x4)
+                0x3ffea230                _bss_table_start = ABSOLUTE (.)
+                0x3ffea230        0x4 LONG 0x3ffea238 _bss_start
+                0x3ffea234        0x4 LONG 0x3fff04c0 _bss_end
+                0x3ffea238                _bss_table_end = ABSOLUTE (.)
+                0x3ffea238                _rodata_end = ABSOLUTE (.)
 
-.bss            0x3ffea230     0x6290
-                0x3ffea230                . = ALIGN (0x8)
-                0x3ffea230                _bss_start = ABSOLUTE (.)
+.bss            0x3ffea238     0x6288
+                0x3ffea238                . = ALIGN (0x8)
+                0x3ffea238                _bss_start = ABSOLUTE (.)
  *(.dynsbss)
  *(.sbss)
  *(.sbss.*)
@@ -17596,8 +17596,7 @@ END GROUP
  *(.gnu.linkonce.sb2.*)
  *(.dynbss)
  *(.bss)
- .bss           0x3ffea230       0x38 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pm_for_bcn_only_mode.o)
- *fill*         0x3ffea268        0x8 
+ .bss           0x3ffea238       0x38 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pm_for_bcn_only_mode.o)
  .bss           0x3ffea270      0x342 C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/lib\libpp.a(pp.o)
                 0x3ffea288                pend_flag_noise_check
                 0x3ffea290                pend_flag_periodic_cal

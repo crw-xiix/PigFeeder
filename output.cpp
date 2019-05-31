@@ -51,7 +51,7 @@ void outputSite(void (*printFunction)(const char *) ) {
 	printFunction("");
 	printFunction("<!-- test -->");
 	printFunction("<body>   ");
-	printFunction("    <div class=\"container\">");
+	printFunction("    <div class=\"container text-center\">");
 	printFunction("        <div class=\"jumbotron\">");
 	printFunction("            <h1>Jordan - Pig Feeding Beast</h1>");
 	printFunction("            <div class=\"row\">");
