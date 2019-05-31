@@ -54,7 +54,6 @@ void outputSite(void (*printFunction)(const char *) ) {
 	printFunction("    <div class=\"container\">");
 	printFunction("        <div class=\"jumbotron\">");
 	printFunction("            <h1>Jordan - Pig Feeding Beast</h1>");
-	printFunction("            <h2>I like pig shit</h2>");
 	printFunction("            <div class=\"row\">");
 	printFunction("                <div class=\"col\" id=\"dTemp\">");
 	printFunction("                    <button type=\"button\" class=\"btn\" id=\"bCycle\">Cycle Feeder</button>");

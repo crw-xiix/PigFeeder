@@ -6,6 +6,9 @@ NetTime::NetTime() {
 	secsPastMid = 0;
 	lastTime = millis();
 	secsSinceLastTimeUpdate = 0;
+	Serial.println("NetTime::NetTime()");
+
+
 }
 	
 void NetTime::setTime(int h, int m, int s) {

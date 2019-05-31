@@ -16,6 +16,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PigFeeder.ino" />
+    <None Include="index.html" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h">
@@ -24,5 +26,32 @@
     <ClInclude Include="LinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="passwords.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nettime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="output.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="board.txt" />
+    <Text Include="template.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="nettime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

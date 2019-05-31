@@ -141,7 +141,8 @@ void loop()
 	int lps = 0;
 	if (client == NULL) {
 		delay(1);
-		return;
+		lps++;
+		if (lps > 50) return;
 	}
 
 	// Wait until the client sends some data
@@ -167,12 +168,12 @@ void loop()
 		return;
 	}
 	if (request.indexOf("/Close") != -1) {
-		client.println("<br>Opening<br>");
+		client.println("<br>Closing<br>");
 		Tasks.add(new TaskOpen(OutArmRetract));
 		return;
 	}
 	if (request.indexOf("/Cycle") != -1) {
-		client.println("<br>Opening<br>");
+		client.println("<br>Cycling<br>");
 		Tasks.add(new TaskOpen(OutArmExtend));
 		Tasks.add(new TaskOpen(OutArmRetract));
 		return;
@@ -180,7 +181,6 @@ void loop()
 	if (request.indexOf("/Dance") != -1) {
 		client.println("<br>Dancing<br>");
 		Tasks.add(new TaskOpen(OutArmExtend,5000));
-
 		Tasks.add(new TaskOpen(OutArmRetract,500));
 		Tasks.add(new TaskOpen(OutArmExtend, 500));
 		Tasks.add(new TaskOpen(OutArmRetract, 500));
@@ -190,8 +190,6 @@ void loop()
 		Tasks.add(new TaskOpen(OutArmRetract, 500));
 		Tasks.add(new TaskOpen(OutArmExtend, 500));
 		Tasks.add(new TaskOpen(OutArmRetract, 5800));
-		
-		
 		return;
 	}
 	//Dump out the website.........
@@ -199,10 +197,6 @@ void loop()
 	outputSite(&clientPrint);
 	tempClient = NULL;
 	delay(5);
-
-
-
-	delay(50);
 }
 
 

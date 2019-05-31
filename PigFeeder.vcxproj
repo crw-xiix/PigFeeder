@@ -102,13 +102,28 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
+    <None Include="index.html" />
     <None Include="PigFeeder.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="nettime.h" />
+    <ClInclude Include="output.h" />
+    <ClInclude Include="passwords.h" />
+    <ClInclude Include="Task.h" />
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="board.txt" />
+    <Text Include="template.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="nettime.cpp" />
+    <ClCompile Include="output.cpp" />
+    <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <PropertyGroup>
     <DebuggerFlavor>VisualMicroDebugger</DebuggerFlavor>
