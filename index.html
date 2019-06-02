@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.5/radial/gauge.min.js"></script>
+<!--    <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.5/radial/gauge.min.js"></script> -->
 
     <script>
         function openButton() {
@@ -38,10 +38,70 @@
             $("#bOpen").click(openButton);
             $("#bClose").click(closeButton);
             $("#bDance").click(danceButton);
+            $("#asdf").click(clicked);
+            $("#asdf2").click(clicked2);
         });
 
-       
+        function clicked() {
+            console.log("a1sdfasdfasdfasdf");
+            var style = $("#asdf").style;
+            //$("#Snout").classList.add("active"); 
+
+            var element = document.getElementById("Snout");
+            element.classList.add("active");
+
+        }
+        function clicked2() {
+            console.log("a2sdfasdfasdfasdf");
+            var element = document.getElementById("Snout");
+            element.classList.remove("active");
+
+        }
     </script>
+    <style>
+        .active {
+            animation-play-state: paused !important;
+        }
+        
+        .animated {
+            -webkit-animation-duration: 3s;
+            animation-duration: 1s;
+            animation-name: flash;
+            animation-iteration-count: infinite;
+            animation-play-state: unset;
+        }
+
+        @-webkit-keyframes flash {
+            from {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+
+            50% {
+                -webkit-transform: scale3d(1.05, 1.05, 1.05);
+                transform: scale3d(1.55, 1.55, 1.55);
+            }
+
+            to {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        @keyframes flash {
+            from, 50%, to {
+                top: 0px;
+                transform: scale3d(1.00, 1.15, 1.15);
+                transform-origin: 50%;
+            }
+
+            25%, 75% {
+                top: 10px;
+                transform: scale3d(1, 1, 1);
+            }
+        }
+    </style>
+
 </head>
 
 <!-- test -->
@@ -63,7 +123,8 @@
                     <button type="button" class="btn btn-danger" id="bDance">Cmon now lets Dance!</button>
                 </div>
             </div>
-
+        
+<!--<img src="https://raw.githubusercontent.com/crw-xiix/PigFeeder/master/Capture.PNG?raw=true" />-->            
             <svg version="1.1" viewBox="0.0 0.0 960.0 720.0" fill="none" stroke="none" stroke-linecap="square" stroke-miterlimit="10" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
                 <clipPath id="p.0"><path d="m0 0l960.0 0l0 720.0l-960.0 0l0 -720.0z" clip-rule="nonzero" /></clipPath>
                 <g clip-path="url(#p.0)">
@@ -78,20 +139,22 @@
                     <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m532.0656 224.13387l0 0c0 -20.691116 15.349243 -37.46457 34.283447 -37.46457l0 0c9.09259 0 17.812683 3.9471436 24.242065 10.973114c6.4294434 7.0259705 10.041443 16.555222 10.041443 26.491455l0 0c0 20.691101 -15.349243 37.464554 -34.28351 37.464554l0 0c-18.934204 0 -34.283447 -16.773453 -34.283447 -37.464554z" fill-rule="evenodd" />
                     <path fill="#ffffff" d="m343.61942 224.13387l0 0c0 -20.691116 15.349243 -37.46457 34.283478 -37.46457l0 0c9.092529 0 17.812653 3.9471436 24.242065 10.973114c6.4293823 7.0259705 10.041382 16.555222 10.041382 26.491455l0 0c0 20.691101 -15.349213 37.464554 -34.283447 37.464554l0 0c-18.934235 0 -34.283478 -16.773453 -34.283478 -37.464554z" fill-rule="evenodd" />
                     <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m343.61942 224.13387l0 0c0 -20.691116 15.349243 -37.46457 34.283478 -37.46457l0 0c9.092529 0 17.812653 3.9471436 24.242065 10.973114c6.4293823 7.0259705 10.041382 16.555222 10.041382 26.491455l0 0c0 20.691101 -15.349213 37.464554 -34.283447 37.464554l0 0c-18.934235 0 -34.283478 -16.773453 -34.283478 -37.464554z" fill-rule="evenodd" />
-                    <path fill="#e06666" d="m387.48557 366.46982l0 0c0 -32.536957 35.189728 -58.91339 78.59842 -58.91339l0 0c43.408722 0 78.59845 26.376434 78.59845 58.91339l0 0c0 32.536957 -35.189728 58.91339 -78.59845 58.91339l0 0c-43.40869 0 -78.59842 -26.376434 -78.59842 -58.91339z" fill-rule="evenodd" />
-                    <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m387.48557 366.46982l0 0c0 -32.536957 35.189728 -58.91339 78.59842 -58.91339l0 0c43.408722 0 78.59845 26.376434 78.59845 58.91339l0 0c0 32.536957 -35.189728 58.91339 -78.59845 58.91339l0 0c-43.40869 0 -78.59842 -26.376434 -78.59842 -58.91339z" fill-rule="evenodd" />
-                    <path fill="#000000" d="m412.18634 366.46982l0 0c0 -11.576233 8.587677 -20.960632 19.181122 -20.960632l0 0c5.0871277 0 9.965912 2.2083435 13.56308 6.139221c3.597168 3.9308777 5.6180115 9.262299 5.6180115 14.821411l0 0c0 11.576233 -8.587677 20.960632 -19.181091 20.960632l0 0c-10.593445 0 -19.181122 -9.384399 -19.181122 -20.960632z" fill-rule="evenodd" />
-                    <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m412.18634 366.46982l0 0c0 -11.576233 8.587677 -20.960632 19.181122 -20.960632l0 0c5.0871277 0 9.965912 2.2083435 13.56308 6.139221c3.597168 3.9308777 5.6180115 9.262299 5.6180115 14.821411l0 0c0 11.576233 -8.587677 20.960632 -19.181091 20.960632l0 0c-10.593445 0 -19.181122 -9.384399 -19.181122 -20.960632z" fill-rule="evenodd" />
-                    <g id="haha">
+                    <g class="animated flash" id="Snout">
+                        <path fill="#e06666" d="m387.48557 366.46982l0 0c0 -32.536957 35.189728 -58.91339 78.59842 -58.91339l0 0c43.408722 0 78.59845 26.376434 78.59845 58.91339l0 0c0 32.536957 -35.189728 58.91339 -78.59845 58.91339l0 0c-43.40869 0 -78.59842 -26.376434 -78.59842 -58.91339z" fill-rule="evenodd" />
+                        <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m387.48557 366.46982l0 0c0 -32.536957 35.189728 -58.91339 78.59842 -58.91339l0 0c43.408722 0 78.59845 26.376434 78.59845 58.91339l0 0c0 32.536957 -35.189728 58.91339 -78.59845 58.91339l0 0c-43.40869 0 -78.59842 -26.376434 -78.59842 -58.91339z" fill-rule="evenodd" />
+
+                        <path fill="#000000" d="m412.18634 366.46982l0 0c0 -11.576233 8.587677 -20.960632 19.181122 -20.960632l0 0c5.0871277 0 9.965912 2.2083435 13.56308 6.139221c3.597168 3.9308777 5.6180115 9.262299 5.6180115 14.821411l0 0c0 11.576233 -8.587677 20.960632 -19.181091 20.960632l0 0c-10.593445 0 -19.181122 -9.384399 -19.181122 -20.960632z" fill-rule="evenodd" />
+                        <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m412.18634 366.46982l0 0c0 -11.576233 8.587677 -20.960632 19.181122 -20.960632l0 0c5.0871277 0 9.965912 2.2083435 13.56308 6.139221c3.597168 3.9308777 5.6180115 9.262299 5.6180115 14.821411l0 0c0 11.576233 -8.587677 20.960632 -19.181091 20.960632l0 0c-10.593445 0 -19.181122 -9.384399 -19.181122 -20.960632z" fill-rule="evenodd" />
+
                         <path fill="#000000" d="m480.0 366.46982l0 0c0 -11.576233 8.587677 -20.960632 19.181091 -20.960632l0 0c5.087158 0 9.965942 2.2083435 13.56311 6.139221c3.597168 3.9308777 5.617981 9.262299 5.617981 14.821411l0 0c0 11.576233 -8.5876465 20.960632 -19.181091 20.960632l0 0c-10.593414 0 -19.181091 -9.384399 -19.181091 -20.960632z" fill-rule="evenodd" />
                         <path stroke="#000000" stroke-width="4.0" stroke-linejoin="round" stroke-linecap="butt" d="m480.0 366.46982l0 0c0 -11.576233 8.587677 -20.960632 19.181091 -20.960632l0 0c5.087158 0 9.965942 2.2083435 13.56311 6.139221c3.597168 3.9308777 5.617981 9.262299 5.617981 14.821411l0 0c0 11.576233 -8.5876465 20.960632 -19.181091 20.960632l0 0c-10.593414 0 -19.181091 -9.384399 -19.181091 -20.960632z" fill-rule="evenodd" />
-                        <path fill="#cfe2f3" d="m80.04724 234.91864l0 0c0 -3.5050507 2.8414078 -6.346466 6.3464584 -6.346466l0 0c1.6831894 0 3.297432 0.66864014 4.487625 1.858841c1.1901932 1.1901855 1.8588333 2.804428 1.8588333 4.487625l0 0c0 3.5050507 -2.8414078 6.346451 -6.3464584 6.346451l0 0c-3.5050507 0 -6.3464584 -2.8414001 -6.3464584 -6.346451z" fill-rule="evenodd" />
-                        <path stroke="#000000" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="butt" d="m80.04724 234.91864l0 0c0 -3.5050507 2.8414078 -6.346466 6.3464584 -6.346466l0 0c1.6831894 0 3.297432 0.66864014 4.487625 1.858841c1.1901932 1.1901855 1.8588333 2.804428 1.8588333 4.487625l0 0c0 3.5050507 -2.8414078 6.346451 -6.3464584 6.346451l0 0c-3.5050507 0 -6.3464584 -2.8414001 -6.3464584 -6.346451z" fill-rule="evenodd" />
+                        <!--<path fill="#cfe2f3" d="m80.04724 234.91864l0 0c0 -3.5050507 2.8414078 -6.346466 6.3464584 -6.346466l0 0c1.6831894 0 3.297432 0.66864014 4.487625 1.858841c1.1901932 1.1901855 1.8588333 2.804428 1.8588333 4.487625l0 0c0 3.5050507 -2.8414078 6.346451 -6.3464584 6.346451l0 0c-3.5050507 0 -6.3464584 -2.8414001 -6.3464584 -6.346451z" fill-rule="evenodd" />
+        <path stroke="#000000" stroke-width="1.0" stroke-linejoin="round" stroke-linecap="butt" d="m80.04724 234.91864l0 0c0 -3.5050507 2.8414078 -6.346466 6.3464584 -6.346466l0 0c1.6831894 0 3.297432 0.66864014 4.487625 1.858841c1.1901932 1.1901855 1.8588333 2.804428 1.8588333 4.487625l0 0c0 3.5050507 -2.8414078 6.346451 -6.3464584 6.346451l0 0c-3.5050507 0 -6.3464584 -2.8414001 -6.3464584 -6.346451z" fill-rule="evenodd" />-->
                     </g>
                 </g>
             </svg>
 
-
+    <button id="asdf">Push Me</button><button id="asdf2">Push Me</button>
 
 
         </div>
