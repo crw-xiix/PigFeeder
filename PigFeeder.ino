@@ -20,6 +20,7 @@
 
 //Local Crap
 #include "LinkedList.h"
+//#include "passwordsMom.h"
 #include "passwords.h"
 #include "output.h"
 #include "Task.h"
@@ -190,6 +191,17 @@ void loop()
 		Tasks.add(new TaskOpen(OutArmRetract, 500));
 		Tasks.add(new TaskOpen(OutArmExtend, 500));
 		Tasks.add(new TaskOpen(OutArmRetract, 5800));
+		return;
+	}
+
+	if (request.indexOf("/data.json") != -1) {
+		client.println("{");
+		client.println("\"test1\" : 14.2,");
+		client.print("\"moving\" : ");
+		client.print((Tasks.size() > 0) ? "1" : "0");
+		client.println(",");
+		client.println("\"test1\" : 14.2");
+		client.println("}");
 		return;
 	}
 	//Dump out the website.........
