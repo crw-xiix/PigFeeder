@@ -113,6 +113,8 @@
     <ClInclude Include="nettime.h" />
     <ClInclude Include="output.h" />
     <ClInclude Include="passwords.h" />
+    <ClInclude Include="passwordsMom.h" />
+    <ClInclude Include="Schedule.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h" />
   </ItemGroup>
@@ -133,7 +135,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties arduino.upload.port="COM25" />
+      <UserProperties arduino.upload.port="COM24" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
