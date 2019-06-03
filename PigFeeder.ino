@@ -186,7 +186,8 @@ void loop()
 	}
 	if (request.indexOf("/Dance") != -1) {
 		client.println("<br>Dancing<br>");
-		Tasks.add(new TaskOpen(OutBBC,5000));
+		//OutBBC ---------- 2000 = 2 seconds 
+		Tasks.add(new TaskOpen(OutBBC,2000));
 		return;
 	}
 
