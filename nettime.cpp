@@ -52,4 +52,4 @@ bool NetTime::needNewTime() {
 	return false;
 }
 
-NetTime netTime;
+NetTime netTime = NetTime();

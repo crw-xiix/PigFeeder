@@ -32,6 +32,8 @@ void TaskOpen::End() {
 	Serial.println(pin);
 }
 
+/*************************  TaskWait *********************************/
+
 void TaskWait::End() {
 	//Nothing
 }
@@ -39,3 +41,4 @@ void TaskWait::End() {
 void TaskWait::Start() {
 	startTime = millis();
 }
+

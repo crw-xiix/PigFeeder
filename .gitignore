@@ -2,6 +2,7 @@
 *.exe
 passwords.h
 board.txt
+Release/
 /Release
 /__vm
 

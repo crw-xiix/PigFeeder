@@ -23,6 +23,8 @@ public:
 };
 
 class TaskWait : public TaskOpen {
+public:
 	void virtual Start();
 	void virtual End();
 };
+

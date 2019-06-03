@@ -20,8 +20,8 @@
 
 //Local Crap
 #include "LinkedList.h"
-//#include "passwordsMom.h"
-#include "passwords.h"
+#include "passwordsMom.h"
+//#include "passwords.h"
 #include "output.h"
 #include "Task.h"
 
@@ -29,6 +29,7 @@
 
 #define OutArmExtend D5
 #define OutArmRetract D6
+#define OutBBC D7
 
 WiFiServer server(80);
 
@@ -59,29 +60,31 @@ void setup()
 	WiFi.config(ip, gateway, subnet);
 	WiFi.begin(wifiNetwork, wifiPassword);
 
-	//Do a little flashy dance once we connect
+	//Do a little flashy dance while we connect
 	while (WiFi.status() != WL_CONNECTED) {
 		digitalWrite(D4, LOW);
+		delay(125); 
+		digitalWrite(D4, HIGH);
 		delay(125);
 	}
 	digitalWrite(D4, LOW);
-	delay(125);
+	delay(250);
 	digitalWrite(D4, HIGH);
 	delay(125);
 	digitalWrite(D4, LOW);
-	delay(125);
+	delay(255);
 	digitalWrite(D4, HIGH);
 	delay(125);
 	digitalWrite(D4, LOW);
-	delay(125);
+	delay(255);
 	digitalWrite(D4, HIGH);
 	delay(125);
 	digitalWrite(D4, HIGH);
-	delay(125);
+	delay(255);
 	digitalWrite(D4, LOW);
 	delay(125);
 	digitalWrite(D4, HIGH);
-	delay(125);
+	delay(255);
 	digitalWrite(D4, LOW);
 	delay(125);
 	digitalWrite(D4, HIGH);
@@ -181,16 +184,7 @@ void loop()
 	}
 	if (request.indexOf("/Dance") != -1) {
 		client.println("<br>Dancing<br>");
-		Tasks.add(new TaskOpen(OutArmExtend,5000));
-		Tasks.add(new TaskOpen(OutArmRetract,500));
-		Tasks.add(new TaskOpen(OutArmExtend, 500));
-		Tasks.add(new TaskOpen(OutArmRetract, 500));
-		Tasks.add(new TaskOpen(OutArmExtend, 500));
-		Tasks.add(new TaskOpen(OutArmRetract, 500));
-		Tasks.add(new TaskOpen(OutArmExtend, 500));
-		Tasks.add(new TaskOpen(OutArmRetract, 500));
-		Tasks.add(new TaskOpen(OutArmExtend, 500));
-		Tasks.add(new TaskOpen(OutArmRetract, 5800));
+		Tasks.add(new TaskOpen(OutBBC,5000));
 		return;
 	}
 
