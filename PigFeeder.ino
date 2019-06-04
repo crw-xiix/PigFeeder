@@ -20,8 +20,8 @@
 
 //Local Crap
 #include "LinkedList.h"
-//#include "passwordsMom.h"
 #include "passwords.h"
+
 #include "output.h"
 #include "Task.h"
 
@@ -42,10 +42,11 @@ IPAddress subnet(DEVICE_SUBNET); // set subnet mask to match your
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
+	pinMode(D4, OUTPUT);
 	pinMode(OutArmExtend, OUTPUT);
 	pinMode(OutArmRetract, OUTPUT);
 	pinMode(OutBBC, OUTPUT);
-	Serial.begin(9600);
+	Serial.begin(115200);
 	digitalWrite(OutArmExtend, HIGH);
 	digitalWrite(OutArmRetract, HIGH);
 	digitalWrite(OutBBC, HIGH);
@@ -58,45 +59,30 @@ void setup()
 	Serial.println();
 	Serial.println();
 	Serial.print("Connecting to ");
+	Serial.println(wifiNetwork);
+
+	WiFi.persistent(false);
 
 	WiFi.config(ip, gateway, subnet);
+	Serial.print("Wifi config");
+	
 	WiFi.begin(wifiNetwork, wifiPassword);
-
+	Serial.print("Wifi Begin");
 	//Do a little flashy dance while we connect
 	while (WiFi.status() != WL_CONNECTED) {
 		digitalWrite(D4, LOW);
 		delay(125); 
 		digitalWrite(D4, HIGH);
-		delay(125);
+		delay(250);
 	}
-	digitalWrite(D4, LOW);
-	delay(250);
-	digitalWrite(D4, HIGH);
-	delay(125);
-	digitalWrite(D4, LOW);
-	delay(255);
-	digitalWrite(D4, HIGH);
-	delay(125);
-	digitalWrite(D4, LOW);
-	delay(255);
-	digitalWrite(D4, HIGH);
-	delay(125);
-	digitalWrite(D4, HIGH);
-	delay(255);
-	digitalWrite(D4, LOW);
-	delay(125);
-	digitalWrite(D4, HIGH);
-	delay(255);
-	digitalWrite(D4, LOW);
-	delay(125);
-	digitalWrite(D4, HIGH);
+	Serial.print("Wifi Connected");
 	// Start the server
 	server.begin();
 	Serial.println("Server started");
 	Serial.print("Use this URL to connect: ");
 	Serial.print("http://");
 	Serial.print(WiFi.localIP());
-	Serial.println("/");
+	Serial.println("");
 }
 
 //Task management
@@ -109,6 +95,8 @@ WiFiClient *tempClient = NULL;
 // Add the main program code into the continuous loop() function
 void loop()
 {
+
+
 	//Serial.println("loop");
 	if (Serial.available()) {
 		char ca[10];
@@ -118,6 +106,7 @@ void loop()
 		char c = ca[0];
 		if ((c == 'o') || (c == 'O')) {
 			Serial.println("Add Task:Open");
+			Tasks.add(new TaskOpen(D4, 500));
 			Tasks.add(new TaskOpen(OutArmExtend));
 		}
 
@@ -170,24 +159,30 @@ void loop()
 
 	if (request.indexOf("/Open") != -1) {
 		client.println("<br>Opening<br>");
+		Tasks.add(new TaskOpen(D4, 500));
 		Tasks.add(new TaskOpen(OutArmExtend));
 		return;
 	}
 	if (request.indexOf("/Close") != -1) {
 		client.println("<br>Closing<br>");
+		Tasks.add(new TaskOpen(D4, 500));
 		Tasks.add(new TaskOpen(OutArmRetract));
 		return;
 	}
 	if (request.indexOf("/Cycle") != -1) {
 		client.println("<br>Cycling<br>");
-		Tasks.add(new TaskOpen(OutArmExtend));
-		Tasks.add(new TaskOpen(OutArmRetract));
+		Tasks.add(new TaskOpen(D4, 500));
+		Tasks.add(new TaskOpen(OutArmExtend,8000));
+		Tasks.add(new TaskOpen(D4, 500));
+		Tasks.add(new TaskOpen(OutBBC,2000));
+		Tasks.add(new TaskOpen(D4, 500));
+		Tasks.add(new TaskOpen(OutArmRetract,9000));
+		Tasks.add(new TaskOpen(D4, 500));
 		return;
 	}
 	if (request.indexOf("/Dance") != -1) {
 		client.println("<br>Dancing<br>");
 		//OutBBC ---------- 2000 = 2 seconds    
-
 		Tasks.add(new TaskOpen(OutBBC,2000));
 		return;
 	}
