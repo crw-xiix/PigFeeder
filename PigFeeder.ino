@@ -21,6 +21,7 @@
 //Local Crap
 #include "LinkedList.h"
 #include "passwords.h"
+#include "nettime.h"
 
 #include "output.h"
 #include "Task.h"
@@ -78,6 +79,7 @@ void setup()
 	Serial.print("Wifi Connected");
 	// Start the server
 	server.begin();
+
 	Serial.println("Server started");
 	Serial.print("Use this URL to connect: ");
 	Serial.print("http://");
@@ -95,6 +97,12 @@ WiFiClient *tempClient = NULL;
 // Add the main program code into the continuous loop() function
 void loop()
 {
+	/*
+	if (netTime.needNewTime()) {
+		Serial.println("Need new time");
+		netTime.getTime();
+	}
+	*/
 
 
 	//Serial.println("loop");
@@ -156,6 +164,9 @@ void loop()
 	Serial.print("New Client: Request: ");
 	Serial.println(request);
 	client.flush();
+	if (request.indexOf("/Time") != -1) {
+
+	}
 
 	if (request.indexOf("/Open") != -1) {
 		client.println("<br>Opening<br>");
@@ -171,13 +182,14 @@ void loop()
 	}
 	if (request.indexOf("/Cycle") != -1) {
 		client.println("<br>Cycling<br>");
-		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmExtend,8000));
-		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutBBC,2000));
-		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmRetract,9000));
-		Tasks.add(new TaskOpen(D4, 500));
+		
+		//TaskOpenBuzz(outputPin, buzzPin, totalTime (ms), startBuzzTime (ms), endBuzzTime (ms)
+		//Adjust as needed.
+		
+		Tasks.add(new TaskOpenBuzz(OutArmExtend,OutBBC,20000,6000,10000));
+		
+		Tasks.add(new TaskOpenBuzz(OutArmRetract,OutBBC,21000,9000,13000));
+		
 		return;
 	}
 	if (request.indexOf("/Dance") != -1) {

@@ -22,6 +22,19 @@ public:
 	bool virtual Process();
 };
 
+class TaskOpenBuzz : public TaskOpen {
+protected:
+	int buzzStart;
+	int buzzEnd;
+	unsigned buzzPin;
+public:
+	TaskOpenBuzz(unsigned ipin, unsigned bpin, int imillis = 20000, int bStart = 6000, int bEnd = 10000);
+	void virtual Start();
+	void virtual End();
+	bool virtual Process();
+};
+
+
 class TaskWait : public TaskOpen {
 public:
 	void virtual Start();
