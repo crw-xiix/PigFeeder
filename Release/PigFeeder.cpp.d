@@ -124,6 +124,11 @@ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Rele
  C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/WiFiClientSecure.h \
  C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/WiFiClientSecureAxTLS.h \
  C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/include/ssl.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266mDNS/ESP8266mDNS.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/WiFiUdp.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\cores\esp8266/Udp.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/include/slist.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ArduinoOTA/ArduinoOTA.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\LinkedList.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\passwords.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\nettime.h \
