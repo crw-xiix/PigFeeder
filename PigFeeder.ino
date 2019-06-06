@@ -29,12 +29,13 @@
 
 #include "output.h"
 #include "Task.h"
+#include "OTASetup.h"
 
 
 
 #define OutArmExtend D5
 #define OutArmRetract D6
-#define OutBBC D7
+#define OutVibrator D7
 
 WiFiServer server(80);
 
@@ -50,11 +51,11 @@ void setup()
 	pinMode(D4, OUTPUT);
 	pinMode(OutArmExtend, OUTPUT);
 	pinMode(OutArmRetract, OUTPUT);
-	pinMode(OutBBC, OUTPUT);
+	pinMode(OutVibrator, OUTPUT);
 	Serial.begin(115200);
 	digitalWrite(OutArmExtend, HIGH);
 	digitalWrite(OutArmRetract, HIGH);
-	digitalWrite(OutBBC, HIGH);
+	digitalWrite(OutVibrator, HIGH);
 	delay(100);
 
 	//Now to get WIFI Going.......
@@ -81,55 +82,8 @@ void setup()
 		delay(250);
 	}
 	Serial.print("Wifi Connected");
-	ArduinoOTA.setHostname("PigFeeder2-ESP8235");
-
-	// No authentication by default
-	// ArduinoOTA.setPassword("admin");
-
-	// Password can be set with it's md5 value as well
-	// MD5(admin) = 21232f297a57a5a743894a0e4a801fc3
-	// ArduinoOTA.setPasswordHash("21232f297a57a5a743894a0e4a801fc3");
-
-
-	//Setup the OTA things
-	ArduinoOTA.onStart([]() {
-		String type;
-		if (ArduinoOTA.getCommand() == U_FLASH) {
-			type = "sketch";
-		}
-		else { // U_SPIFFS
-			type = "filesystem";
-		}
-
-		// NOTE: if updating SPIFFS this would be the place to unmount SPIFFS using SPIFFS.end()
-		Serial.println("Start updating " + type);
-	});
-	ArduinoOTA.onEnd([]() {
-		Serial.println("\nEnd");
-	});
-	ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-		Serial.printf("Progress: %u%%\r", (progress / (total / 100)));
-	});
-	ArduinoOTA.onError([](ota_error_t error) {
-		Serial.printf("Error[%u]: ", error);
-		if (error == OTA_AUTH_ERROR) {
-			Serial.println("Auth Failed");
-		}
-		else if (error == OTA_BEGIN_ERROR) {
-			Serial.println("Begin Failed");
-		}
-		else if (error == OTA_CONNECT_ERROR) {
-			Serial.println("Connect Failed");
-		}
-		else if (error == OTA_RECEIVE_ERROR) {
-			Serial.println("Receive Failed");
-		}
-		else if (error == OTA_END_ERROR) {
-			Serial.println("End Failed");
-		}
-	});
-	ArduinoOTA.begin();
-
+	
+	SetupOTA("PigFeeder2-ESP8235");
 
 	// Start the server
 	server.begin();
@@ -242,16 +196,16 @@ void loop()
 		//TaskOpenBuzz(outputPin, buzzPin, totalTime (ms), startBuzzTime (ms), endBuzzTime (ms)
 		//Adjust as needed.
 		
-		Tasks.add(new TaskOpenBuzz(OutArmExtend,OutBBC,20000,6000,10000));
+		Tasks.add(new TaskOpenBuzz(OutArmExtend,OutVibrator,20000,6000,10000));
 		
-		Tasks.add(new TaskOpenBuzz(OutArmRetract,OutBBC,21000,9000,13000));
+		Tasks.add(new TaskOpenBuzz(OutArmRetract,OutVibrator,21000,9000,13000));
 		
 		return;
 	}
 	if (request.indexOf("/Dance") != -1) {
 		client.println("<br>Dancing<br>");
-		//OutBBC ---------- 2000 = 2 seconds    
-		Tasks.add(new TaskOpen(OutBBC,2000));
+		//OutVibrator ---------- 2000 = 2 seconds    
+		Tasks.add(new TaskOpen(OutVibrator,2000));
 		return;
 	}
 

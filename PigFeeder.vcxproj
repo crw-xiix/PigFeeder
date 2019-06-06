@@ -112,6 +112,7 @@
     <ClInclude Include="feedConfig.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="nettime.h" />
+    <ClInclude Include="OTASetup.h" />
     <ClInclude Include="output.h" />
     <ClInclude Include="passwords.h" />
     <ClInclude Include="passwordsMom.h" />
@@ -125,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nettime.cpp" />
+    <ClCompile Include="OTASetup.cpp" />
     <ClCompile Include="output.cpp" />
     <ClCompile Include="Task.cpp" />
   </ItemGroup>
@@ -136,7 +138,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties custom_esp8266_d1_mini_lite_FlashErase="sdk" arduino.upload.port="192.168.1.106" />
+      <UserProperties custom_esp8266_d1_mini_lite_FlashErase="sdk" arduino.upload.port="192.168.1.101" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
