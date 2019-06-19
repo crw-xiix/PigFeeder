@@ -30,6 +30,8 @@
 #include "output.h"
 #include "Task.h"
 #include "OTASetup.h"
+#include "WebLog.h"
+
 
 
 
@@ -44,6 +46,10 @@ WiFiServer server(80);
 IPAddress ip(DEVICE_IP); // where .xxx is the desired IP Address
 IPAddress gateway(DEVICE_GATEWAY); // set gateway to match your network
 IPAddress subnet(DEVICE_SUBNET); // set subnet mask to match your
+
+IPAddress dns1(DEVICE_DNS1);
+IPAddress dns2(DEVICE_DNS2);
+
 
 // The setup() function runs once each time the micro-controller starts
 void setup()
@@ -62,18 +68,13 @@ void setup()
 	WiFi.mode(WIFI_STA);
 	WiFi.hostname(wifiHostName);
 
-	Serial.println();
-	Serial.println();
-	Serial.print("Connecting to ");
-	Serial.println(wifiNetwork);
-
+	
 	WiFi.persistent(false);
-
-	WiFi.config(ip, gateway, subnet);
-	Serial.print("Wifi config");
+	
+	WiFi.config(ip, gateway, subnet, dns1, dns2);
 	
 	WiFi.begin(wifiNetwork, wifiPassword);
-	Serial.print("Wifi Begin");
+	webLog.println("Wifi Begin");
 	//Do a little flashy dance while we connect
 	while (WiFi.status() != WL_CONNECTED) {
 		digitalWrite(D4, LOW);
@@ -81,18 +82,14 @@ void setup()
 		digitalWrite(D4, HIGH);
 		delay(250);
 	}
-	Serial.print("Wifi Connected");
+	webLog.println("Wifi Connected");
 	
 	SetupOTA("PigFeeder2-ESP8235");
 
+	netTime.Init(DEVICE_TZ);
+
 	// Start the server
 	server.begin();
-
-	Serial.println("Server started");
-	Serial.print("Use this URL to connect: ");
-	Serial.print("http://");
-	Serial.print(WiFi.localIP());
-	Serial.println("");
 }
 
 //Task management
@@ -113,7 +110,7 @@ void loop()
 		netTime.getTime();
 	}
 	*/
-
+	netTime.process();
 
 	//Serial.println("loop");
 	if (Serial.available()) {
@@ -174,36 +171,38 @@ void loop()
 	Serial.print("New Client: Request: ");
 	Serial.println(request);
 	client.flush();
+	if (!client.connected()) return;
 	if (request.indexOf("/Time") != -1) {
 
 	}
 
 	if (request.indexOf("/Open") != -1) {
-		client.println("<br>Opening<br>");
+		webLog.It(netTime.getHourFloat(),"Opening");
 		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmExtend));
+		Tasks.add(new TaskOpen(OutArmExtend,20000));
 		return;
 	}
 	if (request.indexOf("/Close") != -1) {
-		client.println("<br>Closing<br>");
+		webLog.It(netTime.getHourFloat(), "Closing");
 		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmRetract));
+		Tasks.add(new TaskOpen(OutArmRetract,20000));
 		return;
 	}
 	if (request.indexOf("/Cycle") != -1) {
-		client.println("<br>Cycling<br>");
-		
-		//TaskOpenBuzz(outputPin, buzzPin, totalTime (ms), startBuzzTime (ms), endBuzzTime (ms)
-		//Adjust as needed.
-		
+		webLog.It(netTime.getHourFloat(), "Cycling");
 		Tasks.add(new TaskOpenBuzz(OutArmExtend,OutVibrator,20000,6000,10000));
-		
 		Tasks.add(new TaskOpenBuzz(OutArmRetract,OutVibrator,21000,9000,13000));
-		
+		return;
+	}
+
+	if (request.indexOf("/log") != -1) {
+		tempClient = &client;
+		webLog.PrintReverse(clientPrint);
+		tempClient = NULL;
 		return;
 	}
 	if (request.indexOf("/Dance") != -1) {
-		client.println("<br>Dancing<br>");
+		webLog.It(netTime.getHourFloat(), "Dancing");
 		//OutVibrator ---------- 2000 = 2 seconds    
 		Tasks.add(new TaskOpen(OutVibrator,2000));
 		return;
@@ -215,11 +214,13 @@ void loop()
 		client.print("\"moving\" : ");
 		client.print((Tasks.size() > 0) ? "1" : "0");
 		client.println(",");
-		client.println("\"test1\" : 14.2");
+		client.println("\"test2\" : 14.2");
 		client.println("}");
 		return;
 	}
 	//Dump out the website.........
+	
+	if (!client.connected()) return;
 	tempClient = &client;
 	outputSite(&clientPrint);
 	tempClient = NULL;

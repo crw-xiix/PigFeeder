@@ -134,4 +134,5 @@ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Rele
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\nettime.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\output.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\Task.h \
- C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\OTASetup.h
+ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\OTASetup.h \
+ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\WebLog.h

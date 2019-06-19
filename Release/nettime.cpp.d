@@ -124,4 +124,10 @@ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Rele
  C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/BearSSLHelpers.h \
  C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/WiFiClientSecure.h \
  C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/WiFiClientSecureAxTLS.h \
- C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/include/ssl.h
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/include/ssl.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/WiFiUdp.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\cores\esp8266/Udp.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2\libraries\ESP8266WiFi\src/include/slist.h \
+ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\WebLog.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/include/time.h \
+ C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.4.2/tools/sdk/libc/xtensa-lx106-elf/include/machine/time.h
