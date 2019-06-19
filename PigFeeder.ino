@@ -31,6 +31,7 @@
 #include "Task.h"
 #include "OTASetup.h"
 #include "WebLog.h"
+#include "astronomical.h"
 
 
 
@@ -87,9 +88,10 @@ void setup()
 	SetupOTA("PigFeeder2-ESP8235");
 
 	netTime.Init(DEVICE_TZ);
-
+	netTime.GotNewTime = dummy;
 	// Start the server
 	server.begin();
+
 }
 
 //Task management
@@ -98,6 +100,22 @@ Task *curTask = NULL;
 
 //A fucked up pointer because Arduino is fucked up sometimes.
 WiFiClient *tempClient = NULL;
+
+
+
+double sunRise = 6;
+double sunSet = 6;
+
+void dummy() {
+	SunSet sun = SunSet();
+	sun.setPosition(DEVICE_LAT, DEVICE_LON, DEVICE_TZ);
+	sun.setCurrentDate(netTime.year, netTime.month, netTime.day);
+	sunRise = sun.calcSunrise() / 60;
+	sunSet = sun.calcSunset() / 60;
+	char buffer[80];
+	snprintf(buffer, 80, "Sunrise:%f Sunset:%f", sunRise, sunSet);
+	webLog.println(buffer);
+}
 
 // Add the main program code into the continuous loop() function
 void loop()
