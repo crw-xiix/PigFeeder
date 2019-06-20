@@ -84,7 +84,7 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
-	
+	//Charles Likes BBC, just FYI. Don't let him touch you.
 	SetupOTA("ChickenBus-ESP8235");
 
 	netTime.Init(DEVICE_TZ);
