@@ -116,6 +116,9 @@ void dummy() {
 	snprintf(buffer, 80, "Sunrise:%f Sunset:%f", sunRise, sunSet);
 	webLog.println(buffer);
 }
+//Git me out of here
+
+
 
 // Add the main program code into the continuous loop() function
 void loop()
