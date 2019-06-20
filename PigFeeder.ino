@@ -85,7 +85,7 @@ void setup()
 	}
 	webLog.println("Wifi Connected");
 	
-	SetupOTA("PigFeeder2-ESP8235");
+	SetupOTA("ChickenBus-ESP8235");
 
 	netTime.Init(DEVICE_TZ);
 	netTime.GotNewTime = dummy;
@@ -200,13 +200,13 @@ void loop()
 	if (request.indexOf("/Open") != -1) {
 		webLog.It(netTime.getHourFloat(),"Opening");
 		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmExtend,20000));
+		Tasks.add(new TaskOpen(OutArmExtend,65000));
 		return;
 	}
 	if (request.indexOf("/Close") != -1) {
 		webLog.It(netTime.getHourFloat(), "Closing");
 		Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmRetract,20000));
+		Tasks.add(new TaskOpen(OutArmRetract,65000));
 		return;
 	}
 	if (request.indexOf("/Cycle") != -1) {
@@ -252,4 +252,3 @@ void loop()
 void clientPrint(const char *data) {
 	tempClient->println(data);
 }
-
