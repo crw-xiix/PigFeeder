@@ -84,7 +84,8 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
-
+ 
+  //How do we prevent me from fucking this up? 
   //Really?
   //Charles Likes BBC, just FYI. Don't let him touch you.
 	SetupOTA("ChickenBus-ESP8235");
