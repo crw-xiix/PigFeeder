@@ -86,6 +86,7 @@ void setup()
 	webLog.println("Wifi Connected");
 
   //Really?
+  //Charles Likes BBC, just FYI. Don't let him touch you.
 	SetupOTA("ChickenBus-ESP8235");
   
 
