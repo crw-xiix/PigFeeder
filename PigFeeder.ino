@@ -84,8 +84,10 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
-	
+
+  //Really?
 	SetupOTA("ChickenBus-ESP8235");
+  
 
 	netTime.Init(DEVICE_TZ);
 	netTime.GotNewTime = dummy;
