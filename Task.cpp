@@ -1,6 +1,6 @@
 #include "Task.h"
 #include <ESP8266WiFi.h>
-
+#include "WebLog.h"
 
 Task::Task() {
 }
@@ -12,24 +12,31 @@ TaskOpen::TaskOpen(unsigned ipin, int imillis) {
 }
 
 void TaskOpen::Start() {
+	const int sz = 40;
+	char buffer[sz];
+	snprintf(buffer, sz, "Open:Start:%d", pin);
+	webLog.println(buffer);
+
 	startTime = millis();
 	digitalWrite(pin, LOW);
-	Serial.print("Open:Start:");
-	Serial.println(pin);
+
+
 }
 
 bool TaskOpen::Process() {
 	if ((millis() - startTime) > length) {
-		Serial.println("Open:Process over");
 		return false;
 	}
 	return true;
 }
 
 void TaskOpen::End() {
+	const int sz = 40;
+	char buffer[sz];
+	snprintf(buffer, sz, "Open:End:%d", pin);
+	webLog.println(buffer);
+
 	digitalWrite(pin, HIGH);
-	Serial.print("Open:End:");
-	Serial.println(pin);
 }
 
 /*************************  TaskWait *********************************/
@@ -67,18 +74,52 @@ bool TaskOpenBuzz::Process() {
 	}
 
 	if (diff > length) {
-		Serial.println("Open:Process over");
+
 		return false;
 	}
 	return true;
 }
 
 void TaskOpenBuzz::End() {
-	digitalWrite(pin, HIGH);
+	TaskOpen::End();
+	//Clean up our pin
 	digitalWrite(buzzPin, HIGH);
-	Serial.print("Open:End:");
-	Serial.println(pin);
 }
+
+
+///  Task set state
+/*
+class TaskSetState : public TaskOpen {
+	bool On;
+public:
+	TaskSetState(int iPin, bool iOn);
+	void virtual Start();
+	void virtual End();
+	bool virtual Process();
+};*/
+
+
+TaskSetState::TaskSetState(int iPin, bool iOn):TaskOpen(iPin) {
+	On = iOn;
+}
+
+//It's still reverse logic for the board.
+void TaskSetState::Start() {
+	const int sz = 40;
+	char buffer[sz];
+	digitalWrite(pin, !On);
+	snprintf(buffer, sz, "Set:Output: %d->%s", pin, On ? "On" : "Off");
+	webLog.println(buffer);
+}
+
+bool TaskSetState::Process() {
+	return false;
+}
+
+void TaskSetState::End() {
+	//Nothing, state is set.
+}
+
 
 
 /******************** BBB *******************

@@ -35,6 +35,16 @@ public:
 };
 
 
+class TaskSetState: public TaskOpen {
+	bool On;
+public:
+	TaskSetState(int iPin, bool iOn);
+	void virtual Start();
+	void virtual End();
+	bool virtual Process();
+};
+	 
+
 class TaskWait : public TaskOpen {
 public:
 	void virtual Start();

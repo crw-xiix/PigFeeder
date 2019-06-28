@@ -50,6 +50,9 @@
     <ClInclude Include="OTASetup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="astronomical.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="board.txt" />
@@ -66,6 +69,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OTASetup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WebLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="astronomical.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

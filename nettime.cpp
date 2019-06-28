@@ -15,6 +15,7 @@ NetTime::NetTime() {
 	secsPastMid = 0;
 	lastTime = millis();
 	secsSinceLastTimeUpdate = 0;  //Trigger it to look
+	runTime = 0;
 }
 
 void NetTime::Init(long iTZ) {
@@ -46,6 +47,10 @@ float NetTime::getHourFloat() {
 	return secsPastMid / 3600.0f;
 }
 
+float NetTime::getRunTimeHours() {
+	return runTime / 3600.0f;
+}
+
 TimeODay NetTime::getTime() {
 	TimeODay time;
 	time.second = (secsPastMid % 60);
@@ -53,13 +58,15 @@ TimeODay NetTime::getTime() {
 	time.hour = secsPastMid / 24;
 	return time;
 }
-	//We are just going to assume we get called once a second...
+
+//We are just going to assume we get called once a second...
 void NetTime::process() {
 	if ((millis() - lastTime) > 1000) {
 		//for rollover
 		lastTime += ((unsigned long)1000);
 		secsPastMid++;
 		secsSinceLastTimeUpdate++;
+		runTime++;
 		if (secsPastMid >= 86400ul) {
 			secsPastMid = secsPastMid % 86400ul;
 			//Trigger a time update if it's there, otherwise continue
@@ -141,12 +148,8 @@ void NetTime::checkTimeRequest() {
 		day = timeResult->tm_mday;
 		year = timeResult->tm_year+1900;
 
-		sprintf(buffer, "Current Date: %02d/%02d/%02d", month, day, year);
-		webLog.It(getHourFloat(), buffer);
-
+		//This way, if we want to show the time, we can......
 		if (GotNewTime != NULL) GotNewTime();
-
-		//webLog.It(getHourFloat(), "Time received");
 	}
 	// wait ten seconds before asking for the time again
 }

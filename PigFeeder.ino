@@ -38,7 +38,9 @@
 
 #define OutArmExtend D5
 #define OutArmRetract D6
-#define OutVibrator D7
+#define OutShaker D7
+#define OutAux D8
+
 
 WiFiServer server(80);
 
@@ -58,11 +60,11 @@ void setup()
 	pinMode(D4, OUTPUT);
 	pinMode(OutArmExtend, OUTPUT);
 	pinMode(OutArmRetract, OUTPUT);
-	pinMode(OutVibrator, OUTPUT);
+	pinMode(OutShaker, OUTPUT);
 	Serial.begin(115200);
 	digitalWrite(OutArmExtend, HIGH);
 	digitalWrite(OutArmRetract, HIGH);
-	digitalWrite(OutVibrator, HIGH);
+	digitalWrite(OutShaker, HIGH);
 	delay(100);
 
 	//Now to get WIFI Going.......
@@ -124,37 +126,21 @@ void dummy() {
 
 
 // Add the main program code into the continuous loop() function
+unsigned long togMillis = 0;
 void loop()
 {
+
 	//for OTA stuff.........
 	ArduinoOTA.handle();
-	/*
-	if (netTime.needNewTime()) {
-		Serial.println("Need new time");
-		netTime.getTime();
-	}
-	*/
 	netTime.process();
 
-	//Serial.println("loop");
-	if (Serial.available()) {
-		char ca[10];
-
-		Serial.readBytes(ca, 1);
-		Serial.println("Char");
-		char c = ca[0];
-		if ((c == 'o') || (c == 'O')) {
-			Serial.println("Add Task:Open");
-			Tasks.add(new TaskOpen(D4, 500));
-			Tasks.add(new TaskOpen(OutArmExtend));
-		}
-
-		if ((c == 'c') || (c == 'C')) {
-			Serial.println("Add Task:Close");
-			Tasks.add(new TaskOpen(OutArmRetract));
-		}
+	//Toggle the LED light for heartbeat
+	if ((millis() - togMillis) > 100) {
+		digitalWrite(D4, !digitalRead(D4));
+		togMillis = millis();
 	}
 
+	
 	//Now handle our tasks
 	if (Tasks.size() > 0) {
 		Task *thisTask = Tasks.get(0);
@@ -176,7 +162,10 @@ void loop()
 	if (client == NULL) {
 		delay(1);
 		lps++;
-		if (lps > 50) return;
+		if (lps > 50) {
+			
+			return;
+		}
 	}
 
 	// Wait until the client sends some data
@@ -184,7 +173,10 @@ void loop()
 	{
 		delay(1);
 		lps++;
-		if (lps > 100) return;  //Skip wifi stuff.
+		if (lps > 100) {
+			
+			return;  //Skip wifi stuff.
+		}
 	}
 
 	//Bail out, something failed.
@@ -196,29 +188,31 @@ void loop()
 	Serial.println(request);
 	client.flush();
 	if (!client.connected()) return;
-	if (request.indexOf("/Time") != -1) {
-
-	}
 
 	if (request.indexOf("/Open") != -1) {
 		webLog.It(netTime.getHourFloat(),"Opening");
-		Tasks.add(new TaskOpen(D4, 500));
+		//Tasks.add(new TaskOpen(D4, 500));
 		Tasks.add(new TaskOpen(OutArmExtend,65000));
 		return;
 	}
 	if (request.indexOf("/Close") != -1) {
 		webLog.It(netTime.getHourFloat(), "Closing");
-		Tasks.add(new TaskOpen(D4, 500));
+		//Tasks.add(new TaskOpen(D4, 500));
 		Tasks.add(new TaskOpen(OutArmRetract,65000));
 		return;
 	}
 	if (request.indexOf("/Cycle") != -1) {
 		webLog.It(netTime.getHourFloat(), "Cycling");
-		Tasks.add(new TaskOpenBuzz(OutArmExtend,OutVibrator,20000,6000,10000));
-		Tasks.add(new TaskOpenBuzz(OutArmRetract,OutVibrator,21000,9000,13000));
+		Tasks.add(new TaskOpenBuzz(OutArmExtend,OutShaker,20000,6000,10000));
+		Tasks.add(new TaskOpenBuzz(OutArmRetract,OutShaker,21000,9000,13000));
 		return;
 	}
-
+	if (request.indexOf("/AuxOn") != -1) {
+		Tasks.add(new TaskSetState(OutAux, true));
+	}
+	if (request.indexOf("/AuxOff") != -1) {
+		Tasks.add(new TaskSetState(OutAux, false));
+	}
 	if (request.indexOf("/log") != -1) {
 		tempClient = &client;
 		webLog.PrintReverse(clientPrint);
@@ -227,28 +221,17 @@ void loop()
 	}
 	if (request.indexOf("/Dance") != -1) {
 		webLog.It(netTime.getHourFloat(), "Dancing");
-		//OutVibrator ---------- 2000 = 2 seconds    
-		Tasks.add(new TaskOpen(OutVibrator,2000));
+		//OutShaker ---------- 2000 = 2 seconds    
+		Tasks.add(new TaskOpen(OutShaker,2000));
 		return;
 	}
 
-	if (request.indexOf("/data.json") != -1) {
-		client.println("{");
-		client.println("\"test1\" : 14.2,");
-		client.print("\"moving\" : ");
-		client.print((Tasks.size() > 0) ? "1" : "0");
-		client.println(",");
-		client.println("\"test2\" : 14.2");
-		client.println("}");
-		return;
-	}
 	//Dump out the website.........
-	
 	if (!client.connected()) return;
 	tempClient = &client;
 	outputSite(&clientPrint);
 	tempClient = NULL;
-	delay(5);
+	delay(50);
 }
 
 

@@ -24,6 +24,7 @@ struct TimeODay {
 
 class NetTime {
 private:
+	unsigned long runTime = 0;
 	bool first = true;
 	unsigned long lastTime = 0;
 	long secsPastMid = 0;
@@ -43,7 +44,7 @@ public:
 	//We are just going to assume we get called once a second or so...
 	void process();
 	bool needNewTime();
-
+	float getRunTimeHours();
 	float getHourFloat();// 0-24.0
 	void(*GotNewTime)() = NULL;
 
