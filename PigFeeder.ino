@@ -61,10 +61,12 @@ void setup()
 	pinMode(OutArmExtend, OUTPUT);
 	pinMode(OutArmRetract, OUTPUT);
 	pinMode(OutShaker, OUTPUT);
+	pinMode(OutAux, OUTPUT);
 	Serial.begin(115200);
 	digitalWrite(OutArmExtend, HIGH);
 	digitalWrite(OutArmRetract, HIGH);
 	digitalWrite(OutShaker, HIGH);
+	pinMode(OutAux, HIGH);
 	delay(100);
 
 	//Now to get WIFI Going.......

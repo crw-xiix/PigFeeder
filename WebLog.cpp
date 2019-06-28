@@ -71,6 +71,7 @@ void WebLog::PrintReverse(void(*pf)(const char *)) {
 	pf("</p>");
 	pf("<p>Run time:");
 	sprintf(buffer, "%6.2f", netTime.getRunTimeHours());
+
 	pf(buffer);
 	pf("</p>");
 	pf("<table class=\"table table-hover table-bordered\">");
