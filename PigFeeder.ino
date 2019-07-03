@@ -92,7 +92,7 @@ void setup()
   //How do we prevent me from fucking this up? 
   //Really?
   //Charles Likes BBC, just FYI. Don't let him touch you.
-	SetupOTA("ChickenBus-ESP8235");
+	SetupOTA("ChickShit-ESP8235");
   
 
 	netTime.Init(DEVICE_TZ);
