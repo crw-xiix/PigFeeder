@@ -1,6 +1,7 @@
 #pragma once
 #include <ESP8266WiFi.h>
 #include <WiFiUdp.h>
+#include <functional>
 
 /*
 	NetTime.h:
@@ -24,6 +25,7 @@ struct TimeODay {
 
 class NetTime {
 private:
+
 	unsigned long runTime = 0;
 	bool first = true;
 	unsigned long lastTime = 0;
@@ -34,6 +36,7 @@ private:
 	long timeZone = 0;
 
 public:
+	bool invalidTime = true;
 	NetTime();
 	int month = 1, day = 1, year = 2000;
 	void Init(long iTZ);
@@ -47,7 +50,7 @@ public:
 	float getRunTimeHours();
 	float getHourFloat();// 0-24.0
 	void(*GotNewTime)() = NULL;
-
+	std::function<void(void)> newTimeValid = NULL;
 
 private:
 	//Time stuff

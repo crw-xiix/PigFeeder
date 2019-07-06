@@ -18,6 +18,7 @@
     <None Include="PigFeeder.ino" />
     <None Include="index.html" />
     <None Include=".gitignore" />
+    <None Include="edit.html" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h">
@@ -53,10 +54,23 @@
     <ClInclude Include="astronomical.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="crc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleConfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskChicken.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="outputEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="board.txt" />
     <Text Include="template.txt" />
+    <Text Include="templateedit.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="nettime.cpp">
@@ -75,6 +89,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="astronomical.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskChicken.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleConfig.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="outputedit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

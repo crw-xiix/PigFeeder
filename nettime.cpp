@@ -37,6 +37,8 @@ void NetTime::setTime(int h, int m, int s) {
 void NetTime::setTimeSecs(int s) {
 	secsSinceLastTimeUpdate = 0;
 	secsPastMid = s;
+	
+	
 }
 
 long NetTime::getTimeSec() {
@@ -68,6 +70,7 @@ void NetTime::process() {
 		secsSinceLastTimeUpdate++;
 		runTime++;
 		if (secsPastMid >= 86400ul) {
+			invalidTime = true;
 			secsPastMid = secsPastMid % 86400ul;
 			//Trigger a time update if it's there, otherwise continue
 			//With whatever we had before.
@@ -149,7 +152,13 @@ void NetTime::checkTimeRequest() {
 		year = timeResult->tm_year+1900;
 
 		//This way, if we want to show the time, we can......
+		setTimeSecs(epoch % 86400ul);
 		if (GotNewTime != NULL) GotNewTime();
+		if (invalidTime) {
+			invalidTime = false;
+			//Fire off a function.......
+			if (newTimeValid != NULL) newTimeValid();
+		}
 	}
 	// wait ten seconds before asking for the time again
 }

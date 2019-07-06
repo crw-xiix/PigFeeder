@@ -1,5 +1,7 @@
-#pragma once
+#ifndef __Task_h__
+#define __Task_h__ 1
 
+#include "pch.h"
 
 class Task {
 public:
@@ -9,14 +11,15 @@ public:
 	virtual void End() = 0;
 };
 
-
 class TaskOpen : public Task {
 protected:
-	unsigned pin;
+	unsigned pin = 0;
 	unsigned long startTime = 0;
 	unsigned long length = 20000;  //ms
 public:
+	TaskOpen() = default;
 	TaskOpen(unsigned ipin, int imillis=20000);
+	//start is very important, it must fire things up multiple times.
 	void virtual Start();
 	void virtual End();
 	bool virtual Process();
@@ -28,26 +31,38 @@ protected:
 	int buzzEnd;
 	unsigned buzzPin;
 public:
+	TaskOpenBuzz() = default;
 	TaskOpenBuzz(unsigned ipin, unsigned bpin, int imillis = 20000, int bStart = 6000, int bEnd = 10000);
 	void virtual Start();
 	void virtual End();
 	bool virtual Process();
 };
 
-
 class TaskSetState: public TaskOpen {
 	bool On;
 public:
+	TaskSetState() = default;
 	TaskSetState(int iPin, bool iOn);
 	void virtual Start();
 	void virtual End();
 	bool virtual Process();
 };
-	 
 
 class TaskWait : public TaskOpen {
 public:
+	TaskWait() = default;
 	void virtual Start();
 	void virtual End();
 };
 
+class TaskLogMsg : public Task {
+	char buffer[80];
+public:
+	TaskLogMsg();
+	TaskLogMsg(const char *msg);
+	void virtual Start();
+	void virtual End();
+	bool virtual Process();
+};
+
+#endif

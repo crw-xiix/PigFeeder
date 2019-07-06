@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "Task.h"
-#include <ESP8266WiFi.h>
 #include "WebLog.h"
+#include <Arduino.h>
 
 Task::Task() {
 }
@@ -19,7 +20,6 @@ void TaskOpen::Start() {
 
 	startTime = millis();
 	digitalWrite(pin, LOW);
-
 
 }
 
@@ -51,7 +51,7 @@ void TaskWait::Start() {
 
 /************************   TaskOpenBuzz     ************************/
 
-TaskOpenBuzz::TaskOpenBuzz(unsigned ipin, unsigned bPin, int imillis, int bStart,int bEnd):TaskOpen(ipin,imillis) {
+TaskOpenBuzz::TaskOpenBuzz(unsigned ipin, unsigned bPin, int imillis, int bStart, int bEnd) :TaskOpen(ipin, imillis) {
 	buzzStart = bStart;
 	buzzEnd = bEnd;
 	buzzPin = bPin;
@@ -99,7 +99,7 @@ public:
 };*/
 
 
-TaskSetState::TaskSetState(int iPin, bool iOn):TaskOpen(iPin) {
+TaskSetState::TaskSetState(int iPin, bool iOn) :TaskOpen(iPin) {
 	On = iOn;
 }
 
@@ -120,13 +120,30 @@ void TaskSetState::End() {
 	//Nothing, state is set.
 }
 
+/* This just prints a line in the log....*/
 
+TaskLogMsg::TaskLogMsg() {
+	buffer[0] = 0;
+}
+
+TaskLogMsg::TaskLogMsg(const char *msg) {
+	strncpy(buffer, msg, 80);
+}
+
+void TaskLogMsg::Start() { 	}
+
+void TaskLogMsg::End() { }
+
+bool TaskLogMsg::Process() {
+	webLog.println(buffer);
+	return false;
+}
 
 /******************** BBB *******************
 
 */
-				
+
 const char daBeet[16] = {
-					//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
-				      1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0
+	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
+	  1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0
 };

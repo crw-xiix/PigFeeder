@@ -1,0 +1,207 @@
+﻿<!doctype html>
+
+
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>CRW System Monitor</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+    <script>
+        String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
+            function () {
+                "use strict";
+                var str = this.toString();
+                if (arguments.length) {
+                    var t = typeof arguments[0];
+                    var key;
+                    var args = ("string" === t || "number" === t) ?
+                        Array.prototype.slice.call(arguments)
+                        : arguments[0];
+
+                    for (key in args) {
+                        str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+                        
+
+                    }
+                }
+
+                return str;
+            };
+
+        function refresh() {
+            $.getJSON("/data.json", function (data) {
+                console.log(data);
+                if (data.moving > 0) {
+                    animateOn();
+                } else {
+                    animateOff();
+                }
+            });
+        }
+
+        function timerHit() {
+//            loadIt();
+  //          logButton();
+        }
+
+        function loadIt() {
+            $.getJSON("/data.json", function (data) {
+                /*
+                gauges[0].value = data.Temp;
+                gauges[1].value = (data.Water);
+                gauges[2].value = (data.Time);
+                gauges[3].value = (data.LastOutTemp);
+                gauges[4].value = (data.LastRemoteTemp);
+                gauges[5].value = (data.ThermostatSetting);
+                $("#dPump").html("Cooler Pump:" + data.Pump);
+                $("#dFan").html("Cooler Fan:" + data.Fan);
+                $("#dThermo").html("Thermo:" + data.ThermostatCool); 
+                */
+            });
+        }
+
+        function logButton() {
+            $.get("/log.json", function (data) {
+                $("#dLog").html(data);
+            });
+        }
+        function FillPage() {
+            var i;
+            for (i = 0; i < 20; i++) {
+                var st = '<tr><td><label for="task{0}">Task:</label><select class="form-control taskList" id="task{0}"><option value="0">Nothing</option></select></td><td><label for="usr">Time:</label><input type="text" class="form-control" id="time{0}"></td > <td><label class="checkbox-inline"><input type="checkbox" id="sunrise{0}" value="">Sunrise</label><br /><label class="checkbox-inline"><input type="checkbox" id="sunset{0}" value="">Sunset</label></td><td><label for="time{0}">Option:</label><input type="text" class="form-control" id="option{0}"></td></tr>'.formatUnicorn(i);
+                $(".DataArea").append(st);
+            }
+        }
+        function huh() {
+            $.getJSON("/schedule.json", function (data) {
+                console.log("asfasdfa");
+                $("#iTitle").html(data.Title);
+                $("#iVersion").html(data.Version);
+                loadTaskItems(data.TaskItems);
+                loadTaskForm(data.Tasks);
+            });
+        }
+
+        function loadTaskItems(items) {
+            for (i = 0; i < items.length; i++) {
+                $('.taskList').append($('<option>', items[i]));
+            }
+        }
+        function loadTaskForm(items) {
+            for (i = 0; i < items.length; i++) {
+                var st = items[i].task;
+                var objs = st.split(":")
+                var ttask = objs[0];
+                var others = objs[1].split(",",4);
+                //Now we can set the values on screen
+                $("#task"+i).val(ttask);
+                $("#time" + i).val(others[0]);
+                $("#sunrise" + i).prop('checked', (others[1] != 0));
+                $("#sunset" + i).prop('checked', (others[2] != 0));
+                $("#option" + i).val(others[3]);
+            }
+        }
+
+        function sendData() {
+            var st = "?";
+            st += "Title=" + $("#iTitle").html();
+            st += "&";
+            st += "Version=" + $("#iVersion").html();
+            st += "&";
+            for (i = 0; i < 20; i++) {
+                
+                var t = "";
+                var taskSelected = $("#task" + i + " option:selected").val();
+                if (taskSelected == 0) continue;
+
+                t = t + taskSelected;
+
+                t = t + ":" + $("#time" + i).val() + ",";
+                if ($("#sunrise" + i).prop('checked')) {
+                    t += "1,";
+                } else {
+                    t += "0,";
+                }
+                if ($("#sunset" + i).prop('checked')) {
+                    t += "1,";
+                } else {
+                    t += "0,";
+                }
+                t += $("#option" + i).val();
+                st += t + "&";
+            }
+
+            $.get("/setConfig" + t, function (data) {
+                //We sent the data.........  wait for reboot
+                window.location.href = "/";
+            });
+        }
+        
+
+        $(document).ready(function () {
+            huh();
+            $("#bSave").click(sendData);
+            FillPage();
+        });
+
+    </script>
+
+</head>
+<!-- test -->
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 id="iTitle">%%Title%%</h1>
+            <h2 id="iVersion">%%Version%%</h2>
+        </div>
+        <div class="jumbotron">
+            Edit Setup
+        </div>
+        <div class="well">
+            <h3>Events</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Time</th>
+                        <th>Offsets</th>
+                        <th>Options</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody" class="DataArea"></tbody>
+            </table>
+            <button type="button" class="btn btn-success" id="bSave">Save</button>
+        </div>
+
+
+
+
+        <div>Log File</div>
+        <div id="dLog"></div>
+        <br />
+        <div id="dRaw"></div>
+    </div>
+</body>
+</html>
+
+<!--
+                                <option value="0">Nothing</option>
+                                <option value="1">Open Door</option>
+                                <option value="2">Close Door</option>
+                                <option value="3">Light On</option>
+                                <option value="4">Light Off</option>
+                                <option value="5">Log Message</option>
+<tr><td><label for="task%%">Task:</label><select class="form-control" id="task%%"></select></td><td><label for="usr">Time:</label><input type="text" class="form-control" id="time%%">
+</td><td><label class="checkbox-inline"><input type="checkbox" id="sunrise%%" value="">Sunrise</label><br /><label class="checkbox-inline"><input type="checkbox" id="sunset%%" value="">Sunset</label>
+</td><td><label for="time0">Option:</label><input type="text" class="form-control" id="option%%"></td></tr>
+
+    -->

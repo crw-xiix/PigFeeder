@@ -157,6 +157,9 @@ void outputSite(void (*printFunction)(const char *) ) {
 	printFunction("                <div class=\"col\" id=\"\">");
 	printFunction("                </div>");
 	printFunction("                <div class=\"col\" id=\"\">");
+	printFunction("                    <a href=\"/Edit\" class=\"btn btn-info\">Edit Config</a>");
+	printFunction("");
+	printFunction("");
 	printFunction("                </div>");
 	printFunction("            </div>");
 	printFunction("        </div>");
