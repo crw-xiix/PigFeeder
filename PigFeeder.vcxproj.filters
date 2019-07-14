@@ -19,6 +19,7 @@
     <None Include="index.html" />
     <None Include=".gitignore" />
     <None Include="edit.html" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h">

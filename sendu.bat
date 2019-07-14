@@ -1,0 +1,1 @@
+C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\esptool\2.5.0-3-20ed2b9\esptool.exe -vv -cd nodemcu -cb 921600 -cp "COM27" -ca 0x00000 -cf "./Release/PigFeeder.ino.bin"

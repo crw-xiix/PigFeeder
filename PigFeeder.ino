@@ -79,6 +79,9 @@ IPAddress dns1(DEVICE_DNS1);
 IPAddress dns2(DEVICE_DNS2);
 
 
+const char *textHtml = "text/html";
+
+
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
@@ -215,6 +218,7 @@ void printHeader(WiFiClient client, const char *ctype);
 unsigned long togMillis = 0;
 void loop()
 {
+	char buffer[120];
 
 	//for OTA stuff.........
 	ArduinoOTA.handle();
@@ -280,99 +284,123 @@ void loop()
 	if (!client.connected()) return;
 
 	// Read the first line of the request
-	String request = client.readStringUntil('\r');
-	Serial.print("New Client: Request: ");
-	Serial.println(request);
+
+
+	int len = client.readBytesUntil('\r', buffer, 80);
+	buffer[len] = 0;
+
 	client.flush();
 	if (!client.connected()) return;
+	do {
+		if (strstr(buffer, "/Open")) {
+			webLog.It(netTime.getHourFloat(), "Opening");
+			//Tasks.add(new TaskOpen(D4, 500));
+			Tasks.add(new TaskOpen(OutArmExtend, 65000));
+			printHeader(client, textHtml);
+			client.println("Open");
+			break;
+		}
+		if (strstr(buffer, "/Close")) {
+			webLog.It(netTime.getHourFloat(), "Closing");
+			//Tasks.add(new TaskOpen(D4, 500));
+			Tasks.add(new TaskOpen(OutArmRetract, 65000));
+			printHeader(client, textHtml);
+			client.println("Close");
+			break;
+		}
+		if (strstr(buffer, "/Cycle")) {
+			webLog.It(netTime.getHourFloat(), "Cycling");
+			Tasks.add(new TaskOpenBuzz(OutArmExtend, OutShaker, 20000, 6000, 10000));
+			Tasks.add(new TaskOpenBuzz(OutArmRetract, OutShaker, 21000, 9000, 13000));
+			printHeader(client, textHtml);
+			client.println("Cycled");
 
-	if (request.indexOf("/Open") != -1) {
-		webLog.It(netTime.getHourFloat(), "Opening");
-		//Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmExtend, 65000));
-		return;
-	}
-	if (request.indexOf("/Close") != -1) {
-		webLog.It(netTime.getHourFloat(), "Closing");
-		//Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmRetract, 65000));
-		return;
-	}
-	if (request.indexOf("/Cycle") != -1) {
-		webLog.It(netTime.getHourFloat(), "Cycling");
-		Tasks.add(new TaskOpenBuzz(OutArmExtend, OutShaker, 20000, 6000, 10000));
-		Tasks.add(new TaskOpenBuzz(OutArmRetract, OutShaker, 21000, 9000, 13000));
-		return;
-	}
-	if (request.indexOf("/AuxOn") != -1) {
-		Tasks.add(new TaskSetState(OutAux, true));
-	}
-	if (request.indexOf("/AuxOff") != -1) {
-		Tasks.add(new TaskSetState(OutAux, false));
-	}
-	if (request.indexOf("/log") != -1) {
-		tempClient = &client;
-		webLog.PrintReverse(clientPrint);
-		tempClient = NULL;
-		return;
-	}
-	if (request.indexOf("/Dance") != -1) {
-		webLog.It(netTime.getHourFloat(), "Dancing");
-		//OutShaker ---------- 2000 = 2 seconds    
-		Tasks.add(new TaskOpen(OutShaker, 2000));
-		return;
-	}
-	if (request.indexOf("/Edit") != -1) {
-		tempClient = &client;
-		outputEditSite(&clientPrint);
-		tempClient = NULL;
-		client.flush();
-		return;
-	}
-	if (request.indexOf("/schedule.json") != -1) {
-		printHeader(client, "application/json");
-		client.println("{");
-		client.printf("\"Title\": \"%s\",\n", sConfig.Title);
-		client.printf("\"Version\": \"%s\",\n", sConfig.Version);
-		client.printf("\"DST\": %s,\n", sConfig.DST?"true":"false");
-		client.println("\"TasksTotal\": 20,");
+			break;
+		}
+		if (strstr(buffer, "/AuxOn")) {
+			webLog.It(netTime.getHourFloat(), "Aux ON");
+			Tasks.add(new TaskSetState(OutAux, true));
+			printHeader(client, textHtml);
+			client.println("AuxOn");
+			break;
 
-		client.println(" \"TaskItems\" : [ ");
-		for (int i = 0; ; i++) {
-			if (ourTasks[i].func == NULL) break;
-			if (i != 0) client.println(",");
+		}
+		if (strstr(buffer, "/AuxOff")) {
+			webLog.It(netTime.getHourFloat(), "Aux OFF");
+			Tasks.add(new TaskSetState(OutAux, false));
+			printHeader(client, textHtml);
+			client.println("AuxOff");
+			break;
+
+		}
+		if (strstr(buffer, "/log")) {
+			printHeader(client, textHtml);
+			tempClient = &client;
+			webLog.PrintReverse(clientPrint);
+			tempClient = NULL;
+			break;
+		}
+		if (strstr(buffer, "/Dance")) {
+			webLog.It(netTime.getHourFloat(), "Dancing");
+			//OutShaker ---------- 2000 = 2 seconds    
+			Tasks.add(new TaskOpen(OutShaker, 2000));
+			printHeader(client, textHtml);
+			client.println("Dance");
+
+			break;
+		}
+		if (strstr(buffer, "/Edit")) {
+			printHeader(client, textHtml);
+			tempClient = &client;
+			outputEditSite(&clientPrint);
+			tempClient = NULL;
+			break;
+		}
+		if (strstr(buffer, "/schedule.json")) {
+			printHeader(client, "application/json");
 			client.println("{");
-			client.printf("\"value\": \"%d\",\n", ourTasks[i].Id);
-			client.printf("\"text\": \"%s\"\n", ourTasks[i].name);
+			client.printf("\"Title\": \"%s\",\n", sConfig.Title);
+			client.printf("\"Version\": \"%s\",\n", sConfig.Version);
+			client.printf("\"DST\": %s,\n", sConfig.DST ? "true" : "false");
+			client.println("\"TasksTotal\": 20,");
+
+			client.println(" \"TaskItems\" : [ ");
+			for (int i = 0; ; i++) {
+				if (ourTasks[i].func == NULL) break;
+				if (i != 0) client.println(",");
+				client.println("{");
+				client.printf("\"value\": \"%d\",\n", ourTasks[i].Id);
+				client.printf("\"text\": \"%s\"\n", ourTasks[i].name);
+				client.println("}");
+			}
+			client.println("],");
+
+			//Now the tasks
+
+			client.println(" \"Tasks\" : [ ");
+			for (int i = 0;; i++) {
+				if (i == 20) break;
+				const char *temp = sConfig.Get(i);
+				if (strlen(temp) == 0) continue;
+				if (i != 0) client.println(",");
+				if (strlen(temp) == 0) continue;
+				client.printf(" { \"task\": \"%s\"}\n", temp);
+			}
+			client.println(" ]");
 			client.println("}");
+			break;
+
+
+			//Dump out the website......... Invalid commands fall or root fall here
+			if (!client.connected()) return;
+			printHeader(client, textHtml);
+			tempClient = &client;
+			outputSite(&clientPrint);
+			tempClient = NULL;
 		}
-		client.println("],");
-
-		//Now the tasks
-
-		client.println(" \"Tasks\" : [ ");
-		for (int i = 0;; i++) {
-			if (i == 20) break;
-			const char *temp = sConfig.Get(i);
-			if (strlen(temp) == 0) continue;
-			if (i != 0) client.println(",");
-			if (strlen(temp) == 0) continue;
-			client.printf(" { \"task\": \"%s\"}\n", temp);
-		}
-		client.println(" ]");
-		client.println("}");
-
-		client.flush();
-		return;
-		}
-
-	
-	//Dump out the website.........
-	if (!client.connected()) return;
-	tempClient = &client;
-	outputSite(&clientPrint);
-	tempClient = NULL;
-	delay(50);
+	} while (0);
+	client.flush();
+	delay(5);
 }
 
 ///ctype:  application/json : text/html 

@@ -15,39 +15,39 @@
         function openButton() {
             console.log("Trying to Open");
             $.get("/Open", function (data) {
-                refresh();
+                //refresh();
             });
         }
         function closeButton() {
             console.log("Trying to Close");
             $.get("/Close", function (data) {
-                refresh();
+                //refresh();
             });
         }
         function cycleButton() {
             console.log("Trying to Cycle");
             $.get("/Cycle", function (data) {
-                refresh();
+                //refresh();
             });
         }
         function danceButton() {
             console.log("Trying to Dance");
             $.get("/Dance", function (data) {
-                refresh();
+                //refresh();
             });
         }
 
         function auxOn() {
             console.log("Aux On");
             $.get("/AuxOn", function (data) {
-                refresh();
+                //refresh();
             });
         }
 
         function auxOff() {
             console.log("Aux Off");
             $.get("/AuxOff", function (data) {
-                refresh();
+                //refresh();
             });
         }
 
@@ -73,50 +73,6 @@
 
     </script>
     <style>
-        .paused {
-            animation-play-state: paused !important;
-        }
-        
-        .animated {
-            -webkit-animation-duration: 1s;
-            animation-duration: 1s;
-            animation-name: flash;
-            animation-iteration-count: infinite;
-            animation-play-state: running;
-        }
-
-        @-webkit-keyframes flash {
-            from {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-                rotation: 0deg;
-            }
-
-            50% {
-                -webkit-transform: scale3d(1.05, 1.05, 1.05);
-                transform: scale3d(1.55, 1.55, 1.55);
-                rotation: 90deg;
-            }
-
-            to {
-                -webkit-transform: scale3d(1, 1, 1);
-                transform: scale3d(1, 1, 1);
-                rotation: 0deg;
-            }
-        }
-
-        @keyframes flash {
-            from, 50%, to {
-                top: 0px;
-                transform: scale3d(1.00, 1.15, 1.15);
-                transform-origin: 50%;
-            }
-
-            25%, 75% {
-                top: 10px;
-                transform: scale3d(1, 1, 1);
-            }
-        }
     </style>
 
 </head>
