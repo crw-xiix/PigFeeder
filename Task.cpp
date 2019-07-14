@@ -1,10 +1,17 @@
-#include "pch.h"
 #include "Task.h"
 #include "WebLog.h"
 #include <Arduino.h>
 
+FixedRam<Task> Task::ramBase = FixedRam<Task>("Task", 1024);
+
+
 Task::Task() {
 }
+
+void Task::DeleteAll() {
+	ramBase.Reset();
+}
+
 
 
 TaskOpen::TaskOpen(unsigned ipin, int imillis) {
@@ -123,6 +130,8 @@ void TaskSetState::End() {
 /* This just prints a line in the log....*/
 
 TaskLogMsg::TaskLogMsg() {
+	//Empty message.....  Compiler bitched about the array initialization......
+	//See:  https://stackoverflow.com/questions/35413821/how-to-fix-this-array-used-as-initializer-error
 	buffer[0] = 0;
 }
 
@@ -139,9 +148,11 @@ bool TaskLogMsg::Process() {
 	return false;
 }
 
+
 /******************** BBB *******************
 
 */
+
 
 const char daBeet[16] = {
 	//0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F

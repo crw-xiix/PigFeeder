@@ -135,8 +135,10 @@ void setup()
 
 
 
+
+
 //Task management
-LinkedList<Task *> Tasks = LinkedList<Task *>();
+std::list<Task *> Tasks = std::list<Task *>();
 Task *curTask = NULL;
 
 //A fucked up pointer because Arduino is fucked up sometimes.
@@ -170,20 +172,24 @@ int SchCompare(ScheduleObject a, ScheduleObject b) {
 	return (a.timeOfDay < b.timeOfDay);
 }
 bool runScheduler = false;
+
+
+
 void WeGotTime() {
 	//Just clear it as we only want this once......
 	netTime.newTimeValid = NULL;
 	webLog.println("Loading schedule");
 	int j = 0;
 	for (int i = 0; i < 20; i++) {
-		ScheduleObject o = ScheduleObject::Get(sConfig.Get(i));
-		o.completed = false;
-		if (o.specTask != NULL) {
-			schedule.push_back(o);
+		ScheduleObject *o = ScheduleObject::Get(sConfig.Get(i));
+		if (o) {
+			o->completed = false;
+			if (o->specTask != NULL) {
+				schedule.push_back(*o);
+			}
 		}
 	}
-	schedule.sort(SchCompare);//	std::sort(schedule.begin(), schedule.end(), SchCompare);
-/**/
+	schedule.sort(SchCompare);
 
 	webLog.println("Schedule Load Complete");
 	schedulePtr = schedule.begin();
@@ -192,12 +198,13 @@ void WeGotTime() {
 
 	char buffer[80];
 	while (schedulePtr != schedule.end()) {
-		ScheduleObject &so = (*schedulePtr);
-		if (so.timeOfDay < netTime.getHourFloat()) {
+		ScheduleObject so = (*schedulePtr);
+		float ttime = netTime.getHourFloat();
+		if (so.timeOfDay <= netTime.getHourFloat()) {
 			//This event has passed....
 			if (!so.stately) {
 				so.completed = true;
-				Tasks.add(so.specTask->GetTask());
+				Tasks.push_back(so.specTask->task);
 				snprintf(buffer, 80, "Added %2.2f past task: %s", so.timeOfDay, so.specTask->name);
 				webLog.println(buffer);
 			}
@@ -207,8 +214,6 @@ void WeGotTime() {
 		}
 		schedulePtr++;
 	}
-
-
 }
 
 //forward
@@ -229,10 +234,10 @@ void loop()
 		ScheduleObject &so = (*schedulePtr);
 		if (timeDiff > 0.0f) {
 			so.completed = true;
-			Tasks.add(so.specTask->GetTask());
+			Tasks.push_back(so.specTask->task);
 			{
 				char buffer[80];
-				snprintf(buffer, 80,"Added Task: %s", so.specTask->name);
+				snprintf(buffer, 80, "Added Task: %s", so.specTask->name);
 				webLog.println(buffer);
 			}
 			schedulePtr++;
@@ -241,11 +246,18 @@ void loop()
 
 
 	//Toggle the LED light for heartbeat
-	digitalWrite(D4, ((millis()%1000) < 975));
+	if ((millis() % 1000) < 500) {
+		digitalWrite(D4, 1);
+	}
+	else {
+		//digitalWrite(D4,1);
+		analogWrite(D4, 867);
+	}
 
 	//Now handle our tasks
 	if (Tasks.size() > 0) {
-		Task *thisTask = Tasks.get(0);
+		auto ttt = Tasks.begin();
+		Task *thisTask = (*ttt);
 		if (thisTask != curTask) {
 			curTask = thisTask;
 			thisTask->Start();
@@ -253,11 +265,15 @@ void loop()
 		bool val = thisTask->Process();
 		if (!val) {
 			thisTask->End();
-			Tasks.remove(0);
+			Tasks.pop_front();
+			if (Tasks.size() == 0) {
+				//Last one, reset the memory....
+				Task::DeleteAll();
+				webLog.It(netTime.getHourFloat(), "Freeing Task Memory");
+			}
 			curTask = NULL;
 		}
 	}
-
 	//WIFI Stuff last.........
 	WiFiClient client = server.available();
 	int lps = 0;
@@ -272,10 +288,9 @@ void loop()
 	// Wait until the client sends some data
 	while (client.connected() && !client.available())
 	{
-		delay(50);
+		delay(10);
 		lps++;
-		if (lps > 100) {
-
+		if (lps > 40) {
 			return;  //Skip wifi stuff.
 		}
 	}
@@ -294,31 +309,29 @@ void loop()
 	do {
 		if (strstr(buffer, "/Open")) {
 			webLog.It(netTime.getHourFloat(), "Opening");
-			//Tasks.add(new TaskOpen(D4, 500));
-			Tasks.add(new TaskOpen(OutArmExtend, 65000));
+			Tasks.push_back(new TaskOpen(OutArmExtend, 65000));
 			printHeader(client, textHtml);
 			client.println("Open");
 			break;
 		}
 		if (strstr(buffer, "/Close")) {
 			webLog.It(netTime.getHourFloat(), "Closing");
-			//Tasks.add(new TaskOpen(D4, 500));
-			Tasks.add(new TaskOpen(OutArmRetract, 65000));
+			Tasks.push_back(new TaskOpen(OutArmRetract, 65000));
 			printHeader(client, textHtml);
 			client.println("Close");
 			break;
 		}
 		if (strstr(buffer, "/Cycle")) {
 			webLog.It(netTime.getHourFloat(), "Cycling");
-			Tasks.add(new TaskOpenBuzz(OutArmExtend, OutShaker, 20000, 6000, 10000));
-			Tasks.add(new TaskOpenBuzz(OutArmRetract, OutShaker, 21000, 9000, 13000));
+			Tasks.push_back(new TaskOpenBuzz(OutArmExtend, OutShaker, 20000, 6000, 10000));
+			Tasks.push_back(new TaskOpenBuzz(OutArmRetract, OutShaker, 21000, 9000, 13000));
 			printHeader(client, textHtml);
 			client.println("Cycled");
 			break;
 		}
 		if (strstr(buffer, "/AuxOn")) {
 			webLog.It(netTime.getHourFloat(), "Aux ON");
-			Tasks.add(new TaskSetState(OutAux, true));
+			Tasks.push_back(new TaskSetState(OutAux, true));
 			printHeader(client, textHtml);
 			client.println("AuxOn");
 			break;
@@ -326,7 +339,7 @@ void loop()
 		}
 		if (strstr(buffer, "/AuxOff")) {
 			webLog.It(netTime.getHourFloat(), "Aux OFF");
-			Tasks.add(new TaskSetState(OutAux, false));
+			Tasks.push_back(new TaskSetState(OutAux, false));
 			printHeader(client, textHtml);
 			client.println("AuxOff");
 			break;
@@ -342,7 +355,7 @@ void loop()
 		if (strstr(buffer, "/Dance")) {
 			webLog.It(netTime.getHourFloat(), "Dancing");
 			//OutShaker ---------- 2000 = 2 seconds    
-			Tasks.add(new TaskOpen(OutShaker, 2000));
+			Tasks.push_back(new TaskOpen(OutShaker, 2000));
 			printHeader(client, textHtml);
 			client.println("Dance");
 
@@ -388,18 +401,18 @@ void loop()
 			client.println(" ]");
 			client.println("}");
 			break;
-
-
-			//Dump out the website......... Invalid commands fall or root fall here
-			if (!client.connected()) return;
-			printHeader(client, textHtml);
-			tempClient = &client;
-			outputSite(&clientPrint);
-			tempClient = NULL;
 		}
+
+		//Dump out the website......... Invalid commands fall or root fall here
+		if (!client.connected()) return;
+		printHeader(client, textHtml);
+		tempClient = &client;
+		outputSite(&clientPrint);
+		tempClient = NULL;
+		
 	} while (0);
 	client.flush();
-	delay(5);
+	delay(1);
 }
 
 ///ctype:  application/json : text/html 

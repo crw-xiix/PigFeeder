@@ -183,10 +183,12 @@ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Rele
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\outputedit.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\Task.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\pch.h \
+ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\FixedRam.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\OTASetup.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\WebLog.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\astronomical.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ScheduleConfig.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\TaskChicken.h \
  C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\task.h \
- C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\crc.h
+ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\crc.h \
+ C:\Users\charles\AppData\Local\Temp\VMBuilds\PigFeeder\esp8266_d1_mini_lite\Release\ScheduleObject.h

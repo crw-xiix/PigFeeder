@@ -32,14 +32,19 @@ void WebLog::println(const char *msg) {
 
 void WebLog::Print(void(*pf)(const char *)) {
 	char buffer[20];
+	pf("<div class=\"well\">\n");
+	sprintf(buffer, "C++ Version: %ld", __cplusplus);
+	pf(buffer);
+	sprintf(buffer, "Free ram (bytes):%ld", system_get_free_heap_size());
+	pf(buffer);
 	pf("<p>Compile date/time");
 	pf(__DATE__);
 	pf(__TIME__);
 	pf("</p>");
-	pf("<p>Run time:");
+	pf("System Run Time: ");
 	sprintf(buffer, "%6.2f", netTime.getRunTimeHours());
 	pf(buffer);
-	pf("</p>");
+	pf("</div>\n");
 
 	pf("<table class=\"table table-hover table-bordered\">");
 	pf("<thead><tr><th>Time</th><th>Message</th></tr></thead>");
@@ -61,19 +66,19 @@ void WebLog::Print(void(*pf)(const char *)) {
 
 void WebLog::PrintReverse(void(*pf)(const char *)) {
 	char buffer[20];
+	pf("<div class=\"well\">\n");
 	sprintf(buffer, "C++ Version: %ld", __cplusplus);
-
 	pf(buffer);
-	
+	sprintf(buffer, "Free ram (bytes):%ld", system_get_free_heap_size());
+	pf(buffer);
 	pf("<p>Compile date/time");
 	pf(__DATE__);
 	pf(__TIME__);
 	pf("</p>");
-	pf("<p>Run time:");
+	pf("System Run Time: ");
 	sprintf(buffer, "%6.2f", netTime.getRunTimeHours());
-
 	pf(buffer);
-	pf("</p>");
+	pf("</div>\n");
 	pf("<table class=\"table table-hover table-bordered\">");
 	pf("<thead><tr><th>Time</th><th>Message</th></tr></thead>");
 	pf("<tbody>");

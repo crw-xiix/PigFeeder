@@ -2,9 +2,17 @@
 #define __Task_h__ 1
 
 #include "pch.h"
+#include "FixedRam.h"
+
 
 class Task {
+protected: 
+	static FixedRam<Task> ramBase;
 public:
+	inline void* operator new(size_t size) {
+		return ramBase.allocate(size);
+	}
+	static void DeleteAll();
 	Task();
 	virtual void Start() = 0;
 	virtual bool Process() = 0;
@@ -16,6 +24,7 @@ protected:
 	unsigned pin = 0;
 	unsigned long startTime = 0;
 	unsigned long length = 20000;  //ms
+
 public:
 	TaskOpen() = default;
 	TaskOpen(unsigned ipin, int imillis=20000);
@@ -56,7 +65,8 @@ public:
 };
 
 class TaskLogMsg : public Task {
-	char buffer[80];
+	//See:  https://stackoverflow.com/questions/35413821/how-to-fix-this-array-used-as-initializer-error
+	char buffer[80];  //Was  buffer[80] = "";
 public:
 	TaskLogMsg();
 	TaskLogMsg(const char *msg);

@@ -67,9 +67,7 @@ private:
 	static const int NTP_PACKET_SIZE = 48; // NTP time stamp is in the first 48 bytes of the message
 	uint8_t packetBuffer[NTP_PACKET_SIZE]; //buffer to hold incoming and outgoing packets
 	unsigned long lastSendTime = 0;
-//#ifdef __ARDUINO__
 	unsigned long sendNTPpacket(IPAddress& address);
-//#endif
 };
 
 extern NetTime netTime;

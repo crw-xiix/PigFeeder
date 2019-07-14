@@ -7,9 +7,7 @@
 #include "crc.h"
 #include <stdint.h>
 #include "WebLog.h"
-
-
-//Basically, we're gonna support 20 different things on the schedule, and it will have to be sorted also.
+#include "ScheduleObject.h"
 
 class ScheduleConfig {
 private:
@@ -30,7 +28,6 @@ public:
 		if (loc >= 20) return "";
 		if (loc >= sz) return "";
 		return elements[loc];
-
 	}
 	inline void ClearSchedule() {
 		for (int i = 0; i < 20; i++) {
@@ -38,9 +35,7 @@ public:
 		}
 		sz = 0;
 	}
-
 	void Add(const char *command);
-
 	inline void Set(int loc, const char *command) {
 		if (loc < 0) return;
 		if (loc >= 20) return;
@@ -56,13 +51,11 @@ public:
 	bool LoadFromEEPROM();
 
 	inline void ResetDefault() {
-		
 		ClearSchedule();
 		Add("5:1.1,0,0,Test Message");
 		Add("5:0.1,0,0,Schedule Startup");
-		Add("5:0.0,1,0,Sunrise");
-		Add("5:16.15,0,0,Uhoh-It's Times");
-		Add("5:0.0,0,1,Sunset");
+		Add("5:0.0,1,0,Wake up! It's sunrise; you're burning daylight!");
+		Add("5:0.0,0,1,Sunset, Go to bed!");
 		DST = false;
 		strcpy(Title, "New Remote Action Unit");
 		strcpy(Version, "Enter something here");
@@ -70,7 +63,5 @@ public:
 };
 
 extern ScheduleConfig sConfig;
-
-
 
 #endif
