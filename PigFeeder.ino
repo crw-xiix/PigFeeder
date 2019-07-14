@@ -120,7 +120,7 @@ void setup()
 	}
 	webLog.println("Wifi Connected");
 
-	SetupOTA("ChickenShit-ESP8235");
+	SetupOTA("PigFeeder-ESP8235");
 
 
 
@@ -314,7 +314,6 @@ void loop()
 			Tasks.add(new TaskOpenBuzz(OutArmRetract, OutShaker, 21000, 9000, 13000));
 			printHeader(client, textHtml);
 			client.println("Cycled");
-
 			break;
 		}
 		if (strstr(buffer, "/AuxOn")) {
