@@ -117,7 +117,7 @@ void setup()
 	}
 	webLog.println("Wifi Connected");
 
-	SetupOTA("ChickenShit-ESP8235");
+	SetupOTA("PigFeeder-ESP8235");
 
 
 
@@ -289,13 +289,13 @@ void loop()
 	if (request.indexOf("/Open") != -1) {
 		webLog.It(netTime.getHourFloat(), "Opening");
 		//Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmExtend, 65000));
+		Tasks.add(new TaskOpen(OutArmExtend, 8000));
 		return;
 	}
 	if (request.indexOf("/Close") != -1) {
 		webLog.It(netTime.getHourFloat(), "Closing");
 		//Tasks.add(new TaskOpen(D4, 500));
-		Tasks.add(new TaskOpen(OutArmRetract, 65000));
+		Tasks.add(new TaskOpen(OutArmRetract, 10000));
 		return;
 	}
 	if (request.indexOf("/Cycle") != -1) {
