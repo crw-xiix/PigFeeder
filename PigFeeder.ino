@@ -120,7 +120,7 @@ void setup()
 	}
 	webLog.println("Wifi Connected");
 
-	SetupOTA("PigFeeder-ESP8235");
+	SetupOTA("ChickenShit-ESP8235");
 
 
 
