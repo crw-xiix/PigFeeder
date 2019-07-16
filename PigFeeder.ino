@@ -93,7 +93,7 @@ void setup()
 	sConfig.LoadFromEEPROM();
 	Serial.println("Starting Wifi");
 
-	//Now to get WIFI Going.......
+	//Now to get WIFI Going....... 
 	WiFi.persistent(false);
 	WiFi.mode(WIFI_STA);
 	WiFi.hostname(wifiHostName);
