@@ -73,10 +73,10 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\PigFeeder;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\libraries\ESP8266WiFi\src;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\libraries\EEPROM;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\libraries\ESP8266mDNS\src;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\libraries\ArduinoOTA;I:\arduino\libraries;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\libraries;C:\Users\charles\Documents\Arduino\libraries;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\cores\esp8266;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\cores\esp8266\avr;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\cores\esp8266\libb64;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\cores\esp8266\spiffs;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\cores\esp8266\umm_malloc;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\variants\d1_mini;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\tools\sdk\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\tools\sdk\lwip2\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\tools\sdk\libc\xtensa-lx106-elf\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\xtensa-lx106-elf\include\c++\4.8.2;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\xtensa-lx106-elf\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\lib\gcc\xtensa-lx106-elf\4.8.2\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.1\tools\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\PigFeeder;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\libraries\ESP8266WiFi\src;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\libraries\EEPROM;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\libraries\ESP8266mDNS\src;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\libraries\ArduinoOTA;I:\arduino\libraries;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\libraries;C:\Users\charles\Documents\Arduino\libraries;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\cores\esp8266;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\cores\esp8266\avr;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\cores\esp8266\libb64;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\cores\esp8266\spiffs;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\cores\esp8266\umm_malloc;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\variants\d1_mini;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\tools\sdk\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\tools\sdk\lwip2\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\tools\sdk\libc\xtensa-lx106-elf\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\xtensa-lx106-elf\include\c++\4.8.2;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\xtensa-lx106-elf\include\c++\4.8.2\xtensa-lx106-elf;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\xtensa-lx106-elf\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\tools\xtensa-lx106-elf-gcc\2.5.0-3-20ed2b9\lib\gcc\xtensa-lx106-elf\4.8.2\include;C:\Users\charles\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.5.0\tools\sdk\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ProjectDir)__vm\.PigFeeder.vsarduino.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>__ESP8266_ESp8266__;__ESP8266_ESP8266__;__ets__;ICACHE_FLASH;NONOSDK221=1;F_CPU=80000000L;LWIP_OPEN_SRC;TCP_MSS=536;LWIP_FEATURES=1;LWIP_IPV6=0;ARDUINO=10809;ARDUINO_ESP8266_WEMOS_D1MINILITE;ARDUINO_ARCH_ESP8266;FLASHMODE_DOUT;ESP8266;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>__ESP8266_ESp8266__;__ESP8266_ESP8266__;__ets__;ICACHE_FLASH;F_CPU=80000000L;LWIP_OPEN_SRC;TCP_MSS=536;LWIP_FEATURES=1;LWIP_IPV6=0;ARDUINO=10809;ARDUINO_ESP8266_WEMOS_D1MINILITE;ARDUINO_ARCH_ESP8266;FLASHMODE_DOUT;ESP8266;__cplusplus=201103L;_VMICRO_INTELLISENSE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,7 +114,7 @@
     <ClInclude Include="astronomical.h" />
     <ClInclude Include="crc.h" />
     <ClInclude Include="feedConfig.h" />
-    <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="FixedRam.h" />
     <ClInclude Include="nettime.h" />
     <ClInclude Include="OTASetup.h" />
     <ClInclude Include="output.h" />
@@ -122,7 +122,10 @@
     <ClInclude Include="passwords.h" />
     <ClInclude Include="passwordsMom.h" />
     <ClInclude Include="PigSchedule.h" />
+    <ClInclude Include="pins.h" />
+    <ClInclude Include="PostMessage.h" />
     <ClInclude Include="ScheduleConfig.h" />
+    <ClInclude Include="ScheduleObject.h" />
     <ClInclude Include="Task.h" />
     <ClInclude Include="TaskChicken.h" />
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h" />
@@ -135,11 +138,14 @@
   <ItemGroup>
     <ClCompile Include="astronomical.cpp" />
     <ClCompile Include="crc.cpp" />
+    <ClCompile Include="FixedRam.cpp" />
     <ClCompile Include="nettime.cpp" />
     <ClCompile Include="OTASetup.cpp" />
     <ClCompile Include="output.cpp" />
     <ClCompile Include="outputedit.cpp" />
+    <ClCompile Include="PostMessage.cpp" />
     <ClCompile Include="ScheduleConfig.cpp" />
+    <ClCompile Include="ScheduleObject.cpp" />
     <ClCompile Include="Task.cpp" />
     <ClCompile Include="TaskChicken.cpp" />
     <ClCompile Include="WebLog.cpp" />

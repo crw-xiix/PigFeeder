@@ -27,7 +27,7 @@ bool SpecTask::ParseTime(const char *str, float* itime, char *irest) {
 
 	if (isunrise) (*itime) += sConfig.Sunrise;
 	if (isunset) (*itime) += sConfig.Sunset;
-	*itime = rangeIn(*itime, 0.0f, 24.0f);
+	*itime = rangeInF(*itime, 0.0f, 24.0f);
 	return true;
 }
 

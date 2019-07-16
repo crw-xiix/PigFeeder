@@ -20,7 +20,7 @@ public:
 	//	static const int TaskId = 0;  //No task here
 	float timeOfDay = 0.0f;
 	Task *task = NULL;
-	static inline float rangeIn(float val, float min, float, float max) {
+	static inline float rangeInF(float val, float min,  float max) {
 		if (val < min) return min;
 		if (val > max) return max;
 		return val;

@@ -115,7 +115,7 @@ void setup()
 	webLog.println("Wifi Connected");
 	SetupOTA(OTAName);
 	
-	netTime.Init(sConfig.DST?(DEVICE_TZ-1):DEVICE_TZ);
+	netTime.Init(sConfig.DST?(DEVICE_TZ+1):DEVICE_TZ);
 	netTime.funcTimeCalc = CalcSunriseSunset;
 	netTime.funcTimeValid = ReloadSchedule;
 	netTime.funcMidnight = NoteMidnight;

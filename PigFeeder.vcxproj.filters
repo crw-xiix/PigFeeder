@@ -25,9 +25,6 @@
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="passwords.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -67,6 +64,18 @@
     <ClInclude Include="outputEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FixedRam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pins.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ScheduleObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PostMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="board.txt" />
@@ -102,6 +111,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="outputedit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FixedRam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScheduleObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PostMessage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
