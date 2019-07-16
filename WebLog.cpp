@@ -30,6 +30,14 @@ void WebLog::println(const char *msg) {
 	It(netTime.getHourFloat(), msg);
 }
 
+void WebLog::floatToHourMin(char *dest, float t) {
+	int mins = (t * 60);
+	mins = mins % 60;
+	sprintf(dest, "%02d:%02d", (int)t, mins);
+}
+
+
+
 void WebLog::Print(void(*pf)(const char *)) {
 	char buffer[20];
 	pf("<div class=\"well\">\n");
@@ -90,7 +98,8 @@ void WebLog::PrintReverse(void(*pf)(const char *)) {
 		i = i%size;
 
 		pf("<tr><td>");
-		sprintf(buffer, "%2.2f", entries[i].timeOfDay);
+		floatToHourMin(buffer, entries[i].timeOfDay);
+//		sprintf(buffer, "%2.2f", entries[i].timeOfDay);
 		pf(buffer);
 		pf("</td><td>");
 		pf(entries[i].message);  //Gotta watch the //\\ special chars here

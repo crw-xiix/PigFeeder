@@ -17,7 +17,7 @@ private:
 	int tailPtr = 0;
 	WebEntry *entries;
 public:
-
+	void floatToHourMin(char *dest, float t);
 	WebLog(int isize);
 	void It(float time, const char *message);
 	void println(const char *msg);

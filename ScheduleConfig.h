@@ -48,14 +48,16 @@ public:
 		return crcSlow(((uint8_t*)this), sizeof(this));
 	}
 
-	bool LoadFromEEPROM();
+	ScheduleConfig LoadFromEEPROM();
+	bool SaveToEEPROM();
+
 
 	inline void ResetDefault() {
 		ClearSchedule();
 		Add("5:1.1,0,0,Test Message");
 		Add("5:0.1,0,0,Schedule Startup");
 		Add("5:0.0,1,0,Wake up! It's sunrise; you're burning daylight!");
-		Add("5:0.0,0,1,Sunset, Go to bed!");
+		Add("5:0.0,0,1,Sunset Go to bed!");
 		DST = false;
 		strcpy(Title, "New Remote Action Unit");
 		strcpy(Version, "Enter something here");

@@ -35,6 +35,8 @@
 #include "astronomical.h"
 #include "ScheduleConfig.h"
 
+#include "PostMessage.h"
+
 //For storing the arrays of stuff
 #include <vector>
 
@@ -90,7 +92,7 @@ void setup()
 	schedule.reserve(25);
 	
 
-	sConfig.LoadFromEEPROM();
+	sConfig = sConfig.LoadFromEEPROM();
 	Serial.println("Starting Wifi");
 
 	//Now to get WIFI Going....... 
@@ -112,7 +114,8 @@ void setup()
 	}
 	webLog.println("Wifi Connected");
 	SetupOTA(OTAName);
-	netTime.Init(DEVICE_TZ);
+	
+	netTime.Init(sConfig.DST?(DEVICE_TZ-1):DEVICE_TZ);
 	netTime.funcTimeCalc = CalcSunriseSunset;
 	netTime.funcTimeValid = ReloadSchedule;
 	netTime.funcMidnight = NoteMidnight;
@@ -287,13 +290,17 @@ void loop()
 
 	// Read the first line of the request
 
-
 	int len = client.readBytesUntil('\r', buffer, 110);
 	buffer[len] = 0;
 
-	client.flush();
 	if (!client.connected()) return;
 	do {
+		if (strstr(buffer, "POST /SetConfig")) {
+			handlePost(client);
+			printHeader(client, textHtml);
+			client.println("Config Set");
+			break;
+		}
 		if (strstr(buffer, "/Open")) {
 			webLog.It(netTime.getHourFloat(), "Opening");
 			Tasks.push_back(new TaskOpen(OutArmExtend, 65000));

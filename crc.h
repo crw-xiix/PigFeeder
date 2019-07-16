@@ -4,6 +4,6 @@
 
 #include <stdint.h>
 
-uint8_t crcSlow(uint8_t const message[], int nBytes);
+uint8_t crcSlow(uint8_t const *message, int nBytes);
 
 #endif

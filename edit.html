@@ -39,32 +39,14 @@
         function refresh() {
             $.getJSON("/data.json", function (data) {
                 console.log(data);
-                if (data.moving > 0) {
-                    animateOn();
-                } else {
-                    animateOff();
-                }
             });
         }
 
         function timerHit() {
-//            loadIt();
-  //          logButton();
         }
 
         function loadIt() {
             $.getJSON("/data.json", function (data) {
-                /*
-                gauges[0].value = data.Temp;
-                gauges[1].value = (data.Water);
-                gauges[2].value = (data.Time);
-                gauges[3].value = (data.LastOutTemp);
-                gauges[4].value = (data.LastRemoteTemp);
-                gauges[5].value = (data.ThermostatSetting);
-                $("#dPump").html("Cooler Pump:" + data.Pump);
-                $("#dFan").html("Cooler Fan:" + data.Fan);
-                $("#dThermo").html("Thermo:" + data.ThermostatCool); 
-                */
             });
         }
 
@@ -82,9 +64,11 @@
         }
         function huh() {
             $.getJSON("/schedule.json", function (data) {
-                console.log("asfasdfa");
                 $("#iTitle").html(data.Title);
                 $("#iVersion").html(data.Version);
+                $("#DName").val(data.Title);
+                $("#DVersion").val(data.Version);
+                $("#DST").prop('checked', data.DST);
                 loadTaskItems(data.TaskItems);
                 loadTaskForm(data.Tasks);
             });
@@ -111,14 +95,20 @@
         }
 
         function sendData() {
-            var st = "?";
-            st += "Title=" + encodeURIComponent($("#iTitle").html());
-            st += "&";
-            st += "Version=" + encodeURIComponent($("#iVersion").html());
-            st += "&";
+            var st = "";
+            st += "Title=" + $("#DName").val();
+            st += "\n";
+            st += "Version=" + $("#DVersion").val();
+            st += "\n";
+            st += "DST=";
+            if ($("#DST").prop('checked')) {
+                st += "1";
+            } else { st += "0"; }
+            st += "\n";
+
             for (i = 0; i < 20; i++) {
                 
-                var t = "";
+                var t = "Task=";
                 var taskSelected = $("#task" + i + " option:selected").val();
                 if (taskSelected == 0) continue;
 
@@ -135,17 +125,20 @@
                 } else {
                     t += "0,";
                 }
-                t += encodeURIComponent($("#option" + i).val());
-                st += t + "&";
+                t += $("#option" + i).val();
+                st += t + "\n";
             }
+            st += "END\n";
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/SetConfig', true);
+            xhr.setRequestHeader('Content-Type', 'text/html; charset=UTF-8');
+            // send the collected data as JSON
+            xhr.send(st);
             console.log(st);
-            $.get("/setConfig" + st, function (data) {
-                //We sent the data.........  wait for reboot
-               // console.log(st);
-//                window.location.href = "/";
-            });
+            xhr.onloadend = function () {
+                window.location.href = "/";
+            };
         }
-        
 
         $(document).ready(function () {
             huh();
@@ -160,11 +153,16 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1 id="iTitle">%%Title%%</h1>
-            <h2 id="iVersion">%%Version%%</h2>
+            <h1 id="iTitle"></h1>
+            <h2 id="iVersion"></h2>
         </div>
         <div class="jumbotron">
             Edit Setup
+            <label for="DName">Device Name:</label>
+            <input type="text" class="form-control" id="DName">
+            <label for="DVersion">Device Version:</label>
+            <input type="text" class="form-control" id="DVersion">
+            <label class="checkbox-inline"><input type="checkbox" id="DST" value="">Daylight Savings Time</label>
         </div>
         <div class="well">
             <h3>Events</h3>

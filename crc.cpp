@@ -8,7 +8,7 @@
 #define POLYNOMIAL 0xD8
 #define crc uint8_t
 
-uint8_t crcSlow(uint8_t const message[], int nBytes) {
+uint8_t crcSlow(uint8_t const *message, int nBytes) {
 	crc  remainder = 0;
 	/*
 	 * Perform modulo-2 division, a byte at a time.

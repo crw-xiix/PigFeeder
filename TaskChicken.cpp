@@ -4,12 +4,11 @@
 #include "WebLog.h"
 #include "FixedRam.h"
 #include "ScheduleObject.h"
+#include "ScheduleConfig.h"
 
 void* SpecTask::operator new(size_t size) {
 	return ramBase.allocate(size);
 }
-
-
 
 //Format:  14.25 (2:15pm), [0/1], [0/1],.......the rest.........
 bool SpecTask::ParseTime(const char *str, float* itime, char *irest) {
@@ -26,8 +25,8 @@ bool SpecTask::ParseTime(const char *str, float* itime, char *irest) {
 	isunset = rangeIn(isunset, 0, 1);
 	isunrise = rangeIn(isunrise, 0, 1);
 
-	if (isunrise) (*itime) += 5.5f;
-	if (isunset) (*itime) += 17.5f;
+	if (isunrise) (*itime) += sConfig.Sunrise;
+	if (isunset) (*itime) += sConfig.Sunset;
 	*itime = rangeIn(*itime, 0.0f, 24.0f);
 	return true;
 }
