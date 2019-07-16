@@ -111,8 +111,8 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
-	Serial.println("Wifi Connected");
 	SetupOTA("PigFeeder-ESP8235");
+
 
 
 
