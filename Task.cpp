@@ -14,9 +14,9 @@ void Task::DeleteAll() {
 
 
 
-TaskOpen::TaskOpen(unsigned ipin, int imillis) {
+TaskOpen::TaskOpen(unsigned ipin, float secs) {
 	pin = ipin;
-	length = imillis;
+	length = (unsigned long) (secs * 1000);
 }
 
 void TaskOpen::Start() {
@@ -58,9 +58,9 @@ void TaskWait::Start() {
 
 /************************   TaskOpenBuzz     ************************/
 
-TaskOpenBuzz::TaskOpenBuzz(unsigned ipin, unsigned bPin, int imillis, int bStart, int bEnd) :TaskOpen(ipin, imillis) {
-	buzzStart = bStart;
-	buzzEnd = bEnd;
+TaskOpenBuzz::TaskOpenBuzz(unsigned ipin, unsigned bPin, float secs, float bStart, float bEnd) :TaskOpen(ipin, secs) {
+	buzzStart = bStart*1000;
+	buzzEnd = bEnd*1000;
 	buzzPin = bPin;
 }
 
@@ -94,19 +94,9 @@ void TaskOpenBuzz::End() {
 }
 
 
-///  Task set state
-/*
-class TaskSetState : public TaskOpen {
-	bool On;
-public:
-	TaskSetState(int iPin, bool iOn);
-	void virtual Start();
-	void virtual End();
-	bool virtual Process();
-};*/
 
-
-TaskSetState::TaskSetState(int iPin, bool iOn) :TaskOpen(iPin) {
+TaskSetState::TaskSetState(int iPin, bool iOn) :Task() {
+	pin = iPin;
 	On = iOn;
 }
 

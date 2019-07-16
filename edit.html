@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>CRW System Monitor</title>
+    <title>{%1} - Edit Config</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -28,11 +28,8 @@
 
                     for (key in args) {
                         str = str.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
-                        
-
                     }
                 }
-
                 return str;
             };
 
@@ -139,10 +136,13 @@
                 window.location.href = "/";
             };
         }
-
+        function back() {
+            window.location.href = "/";
+        }
         $(document).ready(function () {
             huh();
             $("#bSave").click(sendData);
+            $("#bBack").click(back);
             FillPage();
         });
 
@@ -153,8 +153,8 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            <h1 id="iTitle"></h1>
-            <h2 id="iVersion"></h2>
+            <h1>{%1}</h1>
+            <h2>{%2}</h2>
         </div>
         <div class="jumbotron">
             Edit Setup
@@ -162,33 +162,42 @@
             <input type="text" class="form-control" id="DName">
             <label for="DVersion">Device Version:</label>
             <input type="text" class="form-control" id="DVersion">
+            <br/>
             <label class="checkbox-inline"><input type="checkbox" id="DST" value="">Daylight Savings Time</label>
         </div>
         <div class="well">
             <h3>Events</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Task</th>
-                        <th>Time</th>
-                        <th>Offsets</th>
-                        <th>Options</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="tableBody" class="DataArea"></tbody>
-            </table>
-            <button type="button" class="btn btn-success" id="bSave">Save</button>
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-success" id="bSave">Save</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="btn btn-success" id="bBack">Back</button>
+                </div>
+            </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Task</th>
+                            <th>Time</th>
+                            <th>Offsets</th>
+                            <th>Options</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="DataArea"></tbody>
+                </table>
+
+            </div>
+
+
+
+
+            <div>Log File</div>
+            <div id="dLog"></div>
+            <br />
+            <div id="dRaw"></div>
         </div>
-
-
-
-
-        <div>Log File</div>
-        <div id="dLog"></div>
-        <br />
-        <div id="dRaw"></div>
-    </div>
 </body>
 </html>
 

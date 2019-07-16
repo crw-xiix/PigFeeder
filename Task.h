@@ -27,7 +27,7 @@ protected:
 
 public:
 	TaskOpen() = default;
-	TaskOpen(unsigned ipin, int imillis=20000);
+	TaskOpen(unsigned ipin, float seconds);
 	//start is very important, it must fire things up multiple times.
 	void virtual Start();
 	void virtual End();
@@ -41,14 +41,15 @@ protected:
 	unsigned buzzPin;
 public:
 	TaskOpenBuzz() = default;
-	TaskOpenBuzz(unsigned ipin, unsigned bpin, int imillis = 20000, int bStart = 6000, int bEnd = 10000);
+	TaskOpenBuzz(unsigned ipin, unsigned bpin, float secs = 20.0f, float bStart = 6.0f, float bEnd = 10.f);
 	void virtual Start();
 	void virtual End();
 	bool virtual Process();
 };
 
-class TaskSetState: public TaskOpen {
+class TaskSetState: public Task {
 	bool On;
+	unsigned pin = 0;
 public:
 	TaskSetState() = default;
 	TaskSetState(int iPin, bool iOn);

@@ -125,13 +125,6 @@ void setup()
 
 }
 
-
-
-
-
-
-
-
 //A fucked up pointer because Arduino is fucked up sometimes.
 WiFiClient *tempClient = NULL;
 
@@ -209,9 +202,35 @@ void ReloadSchedule() {
 	}
 }
 
-//forward
-void printHeader(WiFiClient client, const char *ctype);
+//Reads until timeout or terminator or buffer full.  Returns true if all succeed, false if timeout or overrun. It always terminates with /0
+bool readBytesUntil(WiFiClient& client, char* dest, char terminator, int len, unsigned long timeout_ms) {
+	unsigned long start = millis();
+	int pos = 0;
+	while ((millis() - start) < timeout_ms) {
+		if (!client.connected()) { 
+			dest[0] = 0;
+			break; 
+		}
+		if (client.available()) {
+			char c = client.read();
+			dest[pos++] = c;
+			if (c == terminator) {
+				dest[pos] = 0;
+				return true;
+			}
+			if (pos >= len) {
+				dest[len - 1] = 0;
+				return false;
+			}
+		}
+	}
+	return false;
+}
 
+//forward
+void printHeader(WiFiClient& client, const char *ctype);
+
+int requestNo = 0;
 // Add the main program code into the continuous loop() function
 unsigned long togMillis = 0;
 void loop()
@@ -273,27 +292,42 @@ void loop()
 		delay(2);
 		return;
 	}
+	digitalWrite(D4, 0);
+	Serial.printf("Req: %d Incoming\r\n", requestNo++);
 
 	// Wait until the client sends some data
 	while (client.connected() && !client.available())
 	{
 		delay(1);
-		yield();
 		lps++;
-		if (lps > 50) {
+		if (lps > 250) {
+			Serial.println("Too slow, recycling");
+			client.stop();
 			return;  //Skip wifi stuff.
 		}
 	}
 
 	//Bail out, something failed.
-	if (!client.connected()) return;
+	if (!client.connected()) {
+		Serial.println("!Connected");
+		return;
+	}
 
 	// Read the first line of the request
+	//client.setDefaultSync(true);
 
-	int len = client.readBytesUntil('\r', buffer, 110);
-	buffer[len] = 0;
+	Serial.println("Reading.......");
+	Serial.flush();
+	if (!readBytesUntil(client, buffer, '\r', 110, 250)) {
+		Serial.printf("Failed read, recycling\r\n");
+	};
 
-	if (!client.connected()) return;
+	Serial.printf("Got %s\r\n", buffer);
+
+	if (!client.connected()) {
+		Serial.println("!Connected 2");
+		return;
+	}
 	do {
 		if (strstr(buffer, "POST /SetConfig")) {
 			handlePost(client);
@@ -317,8 +351,8 @@ void loop()
 		}
 		if (strstr(buffer, "/Cycle")) {
 			webLog.It(netTime.getHourFloat(), "Cycling");
-			Tasks.push_back(new TaskOpenBuzz(OutArmExtend, OutShaker, 20000, 6000, 10000));
-			Tasks.push_back(new TaskOpenBuzz(OutArmRetract, OutShaker, 21000, 9000, 13000));
+			Tasks.push_back(new TaskOpenBuzz(OutArmExtend, OutShaker, 20, 6, 10));
+			Tasks.push_back(new TaskOpenBuzz(OutArmRetract, OutShaker, 21, 9, 13));
 			printHeader(client, textHtml);
 			client.println("Cycled");
 			break;
@@ -364,6 +398,7 @@ void loop()
 			break;
 		}
 		if (strstr(buffer, "/schedule.json")) {
+			
 			printHeader(client, "application/json");
 			client.println("{");
 			client.printf("\"Title\": \"%s\",\n", sConfig.Title);
@@ -381,9 +416,7 @@ void loop()
 				client.println("}");
 			}
 			client.println("],");
-
 			//Now the tasks
-
 			client.println(" \"Tasks\" : [ ");
 			for (int i = 0;; i++) {
 				if (i == 20) break;
@@ -404,15 +437,17 @@ void loop()
 		tempClient = &client;
 		outputSite(&clientPrint);
 		tempClient = NULL;
+		break;
 		
 	} while (0);
-	client.flush();
-	delay(1);
+	Serial.println("Request Finished");
+	
 }
 
 ///ctype:  application/json : text/html 
-void printHeader(WiFiClient client, const char *ctype) {
+void printHeader(WiFiClient& client, const char *ctype) {
 	//application / json
+	if (!client.connected()) return;
 	client.println(F("HTTP/1.1 200 OK"));
 	client.print(F("Content-Type: "));
 	client.print(ctype);
@@ -420,6 +455,32 @@ void printHeader(WiFiClient client, const char *ctype) {
 	client.println("");
 }
 
+
+const char *getVarData(int val) {
+	switch (val) {
+	case 1: return sConfig.Title;
+	case 2: return sConfig.Version;
+	default: return "Undefined";
+	}
+}
+
+
 void clientPrint(const char *data) {
+	int iid = 0;
+	//Simple replacement of title, version
+	const char *ptr = NULL;
+	ptr = strstr(data, "{%");
+	if (!tempClient->connected()) return;
+	if (ptr) {
+		tempClient->write(data, ptr - data);
+		ptr += 2;
+		if (sscanf(ptr, "%d", &iid) == 1) {
+			tempClient->print(getVarData(iid));
+		}
+		ptr += 2;
+		tempClient->println(ptr);
+		return;
+	}
+
 	tempClient->println(data);
 }

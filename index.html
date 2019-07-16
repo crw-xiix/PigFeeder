@@ -1,60 +1,51 @@
 ﻿<!doctype html>
-<!-- test -->
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Pig Feeding Beast</title>
+    <title>{%1}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<!--    <script src="//cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.5/radial/gauge.min.js"></script> -->
-
     <script>
         function openButton() {
             console.log("Trying to Open");
             $.get("/Open", function (data) {
-                //refresh();
             });
         }
         function closeButton() {
             console.log("Trying to Close");
             $.get("/Close", function (data) {
-                //refresh();
             });
         }
         function cycleButton() {
             console.log("Trying to Cycle");
             $.get("/Cycle", function (data) {
-                //refresh();
             });
         }
         function danceButton() {
             console.log("Trying to Dance");
             $.get("/Dance", function (data) {
-                //refresh();
             });
         }
 
         function auxOn() {
             console.log("Aux On");
             $.get("/AuxOn", function (data) {
-                //refresh();
             });
         }
 
         function auxOff() {
             console.log("Aux Off");
             $.get("/AuxOff", function (data) {
-                //refresh();
             });
         }
 
         function refresh() {
-            $.getJSON("/data.json", function (data) {
+           /* $.getJSON("/data.json", function (data) {
                 console.log(data);
-            });
+            });*/
             $.get("/log.json", function (data) {
                 $("#dLog").html(data);
             });
@@ -68,7 +59,7 @@
             $("#bAuxOn").click(auxOn);
             $("#bAuxOff").click(auxOff);
             refresh();
-            setInterval(refresh, 1500);
+            setInterval(refresh, 3000);
         });
 
     </script>
@@ -76,48 +67,37 @@
     </style>
 
 </head>
-
-<!-- test -->
 <body>   
     <div class="container text-center">
         <div class="jumbotron">
-            <h1>Jordan - Pig Feeding Beast</h1>
-            <h2>OTA Code Upload</h2>
+            <h1>{%1}</h1>
+            <h2>{%2}</h2>
             <div class="row">
-                <div class="col" id="dTemp">
+                <div class="col">
                     <button type="button" class="btn btn-success" id="bCycle">Cycle Feeder</button>
                 </div>
-                <div class="col" id="dWind">
+                <div class="col">
                     <button type="button" class="btn btn-warning" id="bOpen">Open Feed Tube</button>
                 </div>
-                <div class="col" id="dWater">
+                <div class="col">
                     <button type="button" class="btn  btn-warning" id="bClose">Close Feed Tube</button>
                 </div>
-                <div class="col" id="dfWater">
+                <div class="col">
                     <button type="button" class="btn btn-danger" id="bDance">Cmon now lets Dance!</button>
                 </div>
             </div>
             <br />
             <div class="row">
-                <div class="col" id="dAuxOn">
+                <div class="col">
                     <button type="button" class="btn btn-success" id="bAuxOn">Aux On</button>
                 </div>
-                <div class="col" id="dAuxOff">
+                <div class="col">
                     <button type="button" class="btn btn-warning" id="bAuxOff">Aux Off</button>
                 </div>
-                <div class="col" id="">
+                <div class="col">
                 </div>
-                <div class="col" id="">
+                <div class="col">
                     <a href="/Edit" class="btn btn-info">Edit Config</a>
-
-
-                </div>
-            </div>
-        </div>
-        <br>
-        <div id="dLog">
-            Enable Javascript to see the log......
-        </div>
-    </div>
+                </div></div></div><div id="dLog"></div></div>
 </body>
 </html>
