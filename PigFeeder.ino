@@ -111,12 +111,7 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
-	SetupOTA("PigFeeder-ESP8235");
-
-
-
-
-
+	SetupOTA(OTAName);
 	netTime.Init(DEVICE_TZ);
 	netTime.funcTimeCalc = CalcSunriseSunset;
 	netTime.funcTimeValid = ReloadSchedule;

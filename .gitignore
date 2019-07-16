@@ -3,17 +3,9 @@
 passwords.h
 board.txt
 Release/
-/Release
-/__vm
-/Release/
+__vm/
 
 
 
 
-
-/Release
-Release/
-Release
-passwords.h
-board.txt
 
