@@ -19,32 +19,11 @@
 
 #include <EEPROM.h>
 
-/*
-#include <WiFiUdp.h>
-#include <WiFiServerSecureBearSSL.h>
-#include <WiFiServerSecureAxTLS.h>
-#include <WiFiServerSecure.h>
-#include <WiFiServer.h>
-#include <WiFiClientSecureBearSSL.h>
-#include <WiFiClientSecureAxTLS.h>
-#include <WiFiClientSecure.h>
-#include <WiFiClient.h>
-#include <ESP8266WiFiType.h>
-#include <ESP8266WiFiSTA.h>
-#include <ESP8266WiFiScan.h>
-#include <ESP8266WiFiMulti.h>
-#include <ESP8266WiFiGeneric.h>
-#include <ESP8266WiFiAP.h>
-#include <CertStoreBearSSL.h>
-#include <BearSSLHelpers.h> */
 
-#include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
-#include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 
-//Local Crap
-#include "LinkedList.h"
+//Local Stuff
 #include "passwords.h"
 #include "nettime.h"
 
@@ -56,16 +35,10 @@
 #include "astronomical.h"
 #include "ScheduleConfig.h"
 
+//For storing the arrays of stuff
+#include <vector>
 
-#include <list>
-
-
-
-#define OutArmExtend D5
-#define OutArmRetract D6
-#define OutShaker D7
-#define OutAux D8
-
+#include "pins.h"
 
 WiFiServer server(80);
 
@@ -81,36 +54,55 @@ IPAddress dns2(DEVICE_DNS2);
 
 const char *textHtml = "text/html";
 
+//Task management
+std::vector<Task *> Tasks = std::vector<Task *>();
+Task *curTask = NULL;
+
+std::vector<ScheduleObject*> schedule = std::vector<ScheduleObject*>();
+std::vector<ScheduleObject*>::iterator schedulePtr;
+
+int SchCompare(ScheduleObject *a, ScheduleObject *b) {
+	return (a->timeOfDay < b->timeOfDay);
+}
 
 // The setup() function runs once each time the micro-controller starts
 void setup()
 {
+	Serial.begin(115200);
+	delay(100);
+	Serial.println("Starting up");
+
 	pinMode(D4, OUTPUT);
 	pinMode(OutArmExtend, OUTPUT);
 	pinMode(OutArmRetract, OUTPUT);
 	pinMode(OutShaker, OUTPUT);
 	pinMode(OutAux, OUTPUT);
-
+	Serial.println("Pin Mode set");
 
 	digitalWrite(OutArmExtend, HIGH);
 	digitalWrite(OutArmRetract, HIGH);
 	digitalWrite(OutShaker, HIGH);
-	pinMode(OutAux, HIGH);
+	digitalWrite(OutAux, HIGH);
+
+	
+	
+	Tasks.reserve(20);
+	schedule.reserve(25);
+	
 
 	sConfig.LoadFromEEPROM();
-
+	Serial.println("Starting Wifi");
 
 	//Now to get WIFI Going.......
+	WiFi.persistent(false);
 	WiFi.mode(WIFI_STA);
 	WiFi.hostname(wifiHostName);
-
-
-	WiFi.persistent(false);
 
 	WiFi.config(ip, gateway, subnet, dns1, dns2);
 
 	WiFi.begin(wifiNetwork, wifiPassword);
 	webLog.println("Wifi Begin");
+	Serial.println("Wifi Begin");
 	//Do a little flashy dance while we connect
 	while (WiFi.status() != WL_CONNECTED) {
 		digitalWrite(D4, LOW);
@@ -119,17 +111,19 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
-
+	Serial.println("Wifi Connected");
 	SetupOTA("PigFeeder-ESP8235");
 
 
 
 
 	netTime.Init(DEVICE_TZ);
-	netTime.GotNewTime = dummy;
-	netTime.newTimeValid = WeGotTime;
+	netTime.funcTimeCalc = CalcSunriseSunset;
+	netTime.funcTimeValid = ReloadSchedule;
+	netTime.funcMidnight = NoteMidnight;
 	// Start the server
 	server.begin();
+	Serial.println("Setup over");
 
 }
 
@@ -137,19 +131,19 @@ void setup()
 
 
 
-//Task management
-std::list<Task *> Tasks = std::list<Task *>();
-Task *curTask = NULL;
+
+
 
 //A fucked up pointer because Arduino is fucked up sometimes.
 WiFiClient *tempClient = NULL;
 
+void NoteMidnight() {
+	webLog.println("Midnight cross over");
+}
 
-
-double sunRise = 6;
-double sunSet = 6;
-
-void dummy() {
+void CalcSunriseSunset() {
+	double sunRise = 6;
+	double sunSet = 6;
 	SunSet sun = SunSet();
 	sun.setPosition(DEVICE_LAT, DEVICE_LON, DEVICE_TZ);
 	sun.setCurrentDate(netTime.year, netTime.month, netTime.day);
@@ -160,24 +154,26 @@ void dummy() {
 	char buffer[80];
 	snprintf(buffer, 80, "Sunrise:%f Sunset:%f", sunRise, sunSet);
 	webLog.println(buffer);
-
 }
-//Git me out of here
-//ScheduleObject schedule[20];
 
-std::list<ScheduleObject> schedule = std::list<ScheduleObject>();
-std::list<ScheduleObject>::iterator schedulePtr;
 
-int SchCompare(ScheduleObject a, ScheduleObject b) {
-	return (a.timeOfDay < b.timeOfDay);
-}
 bool runScheduler = false;
 
 
 
-void WeGotTime() {
-	//Just clear it as we only want this once......
-	netTime.newTimeValid = NULL;
+void ReloadSchedule() {
+	webLog.println("Clearing schedule");
+	schedule.clear();
+	SpecTask::DeleteAll();
+	ScheduleObject::DeleteAll();
+	Tasks.clear();
+	//Sorry buddy :)
+	if (curTask) {
+		webLog.println("Deleting left over task in queue.");
+		curTask->End();
+	}
+	curTask = NULL;
+	Task::DeleteAll();
 	webLog.println("Loading schedule");
 	int j = 0;
 	for (int i = 0; i < 20; i++) {
@@ -185,20 +181,19 @@ void WeGotTime() {
 		if (o) {
 			o->completed = false;
 			if (o->specTask != NULL) {
-				schedule.push_back(*o);
+				schedule.push_back(o);
 			}
 		}
 	}
-	schedule.sort(SchCompare);
+	sort(schedule.begin(), schedule.end(), SchCompare);
 
 	webLog.println("Schedule Load Complete");
 	schedulePtr = schedule.begin();
 	runScheduler = true;
 
-
 	char buffer[80];
 	while (schedulePtr != schedule.end()) {
-		ScheduleObject so = (*schedulePtr);
+		ScheduleObject &so = *(*schedulePtr);
 		float ttime = netTime.getHourFloat();
 		if (so.timeOfDay <= netTime.getHourFloat()) {
 			//This event has passed....
@@ -224,14 +219,13 @@ unsigned long togMillis = 0;
 void loop()
 {
 	char buffer[120];
-
 	//for OTA stuff.........
 	ArduinoOTA.handle();
 	netTime.process();
 	
 	if (runScheduler && (schedulePtr != schedule.end())) {
-		float timeDiff = netTime.getHourFloat() - ((*schedulePtr).timeOfDay);
-		ScheduleObject &so = (*schedulePtr);
+		ScheduleObject &so = *(*schedulePtr);
+		float timeDiff = netTime.getHourFloat() - so.timeOfDay;
 		if (timeDiff > 0.0f) {
 			so.completed = true;
 			Tasks.push_back(so.specTask->task);
@@ -243,15 +237,14 @@ void loop()
 			schedulePtr++;
 		}
 	}
-
-
+	
 	//Toggle the LED light for heartbeat
-	if ((millis() % 1000) < 500) {
-		digitalWrite(D4, 1);
+	if ((millis() % 1024) < 500) {
+		analogWrite(D4,950);
 	}
 	else {
-		//digitalWrite(D4,1);
-		analogWrite(D4, 867);
+		//Dim it some for Jordan's apricot and peach sensitive eyes
+		digitalWrite(D4, 1);
 	}
 
 	//Now handle our tasks
@@ -265,7 +258,7 @@ void loop()
 		bool val = thisTask->Process();
 		if (!val) {
 			thisTask->End();
-			Tasks.pop_front();
+			Tasks.erase(Tasks.begin());
 			if (Tasks.size() == 0) {
 				//Last one, reset the memory....
 				Task::DeleteAll();
@@ -274,23 +267,22 @@ void loop()
 			curTask = NULL;
 		}
 	}
+	
 	//WIFI Stuff last.........
 	WiFiClient client = server.available();
 	int lps = 0;
-	if (client == NULL) {
-		delay(1);
-		lps++;
-		if (lps > 5) {
-			return;
-		}
+	if (!client) {
+		delay(2);
+		return;
 	}
 
 	// Wait until the client sends some data
 	while (client.connected() && !client.available())
 	{
-		delay(10);
+		delay(1);
+		yield();
 		lps++;
-		if (lps > 40) {
+		if (lps > 50) {
 			return;  //Skip wifi stuff.
 		}
 	}
@@ -301,7 +293,7 @@ void loop()
 	// Read the first line of the request
 
 
-	int len = client.readBytesUntil('\r', buffer, 80);
+	int len = client.readBytesUntil('\r', buffer, 110);
 	buffer[len] = 0;
 
 	client.flush();
@@ -353,11 +345,12 @@ void loop()
 			break;
 		}
 		if (strstr(buffer, "/Dance")) {
-			webLog.It(netTime.getHourFloat(), "Dancing");
+			webLog.It(netTime.getHourFloat(), "Triggering Schedule Reload");
 			//OutShaker ---------- 2000 = 2 seconds    
-			Tasks.push_back(new TaskOpen(OutShaker, 2000));
+			
+			netTime.triggerReload = true;
 			printHeader(client, textHtml);
-			client.println("Dance");
+			client.println("Reload");
 
 			break;
 		}

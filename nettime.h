@@ -25,9 +25,7 @@ struct TimeODay {
 
 class NetTime {
 private:
-
 	unsigned long runTime = 0;
-	bool first = true;
 	unsigned long lastTime = 0;
 	long secsPastMid = 0;
 	long secsSinceLastTimeUpdate = 0;
@@ -36,7 +34,10 @@ private:
 	long timeZone = 0;
 
 public:
+	bool triggerReload = false;
+	bool first = true;
 	bool invalidTime = true;
+
 	NetTime();
 	int month = 1, day = 1, year = 2000;
 	void Init(long iTZ);
@@ -49,9 +50,12 @@ public:
 	bool needNewTime();
 	float getRunTimeHours();
 	float getHourFloat();// 0-24.0
-	void(*GotNewTime)() = NULL;
-	std::function<void(void)> newTimeValid = NULL;
-
+	//This is called all the time saying we got a time server update, use to calc sunrise and shit.
+	std::function<void(void)> funcTimeCalc = NULL;
+	//This is called when we go from invalid time to good time, ie: start and after midnight
+	std::function<void(void)> funcTimeValid = NULL;
+	//This is called to let the program be aware all time are now invalid......
+	std::function<void(void)> funcMidnight = NULL;
 private:
 	//Time stuff
 	unsigned int localPort = 2390;      // local port to listen for UDP packets

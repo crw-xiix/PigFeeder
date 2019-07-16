@@ -69,9 +69,11 @@ void NetTime::process() {
 		secsPastMid++;
 		secsSinceLastTimeUpdate++;
 		runTime++;
-		if (secsPastMid >= 86400ul) {
+		if ((secsPastMid >= 86400ul)||(triggerReload)) {
+			triggerReload = false;
 			invalidTime = true;
 			secsPastMid = secsPastMid % 86400ul;
+			if (funcMidnight != NULL) funcMidnight();
 			//Trigger a time update if it's there, otherwise continue
 			//With whatever we had before.
 			first = true;
@@ -82,7 +84,6 @@ void NetTime::process() {
 
 // On the hour for now...
 bool NetTime::needNewTime() {
-	//if (secsSinceLastTimeUpdate > (60)) return true; // On the minute for now...
 	if (secsSinceLastTimeUpdate > (3600)) return true; // On the hour for now...
 	return false;
 }
@@ -153,11 +154,14 @@ void NetTime::checkTimeRequest() {
 
 		//This way, if we want to show the time, we can......
 		setTimeSecs(epoch % 86400ul);
-		if (GotNewTime != NULL) GotNewTime();
+
+		if (funcTimeCalc != NULL) funcTimeCalc();
+
+		
 		if (invalidTime) {
 			invalidTime = false;
 			//Fire off a function.......
-			if (newTimeValid != NULL) newTimeValid();
+			if (funcTimeValid != NULL) funcTimeValid();
 		}
 	}
 	// wait ten seconds before asking for the time again

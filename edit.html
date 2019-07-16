@@ -112,9 +112,9 @@
 
         function sendData() {
             var st = "?";
-            st += "Title=" + $("#iTitle").html();
+            st += "Title=" + encodeURIComponent($("#iTitle").html());
             st += "&";
-            st += "Version=" + $("#iVersion").html();
+            st += "Version=" + encodeURIComponent($("#iVersion").html());
             st += "&";
             for (i = 0; i < 20; i++) {
                 
@@ -135,13 +135,14 @@
                 } else {
                     t += "0,";
                 }
-                t += $("#option" + i).val();
+                t += encodeURIComponent($("#option" + i).val());
                 st += t + "&";
             }
-
-            $.get("/setConfig" + t, function (data) {
+            console.log(st);
+            $.get("/setConfig" + st, function (data) {
                 //We sent the data.........  wait for reboot
-                window.location.href = "/";
+               // console.log(st);
+//                window.location.href = "/";
             });
         }
         
