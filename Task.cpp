@@ -3,16 +3,24 @@
 #include <Arduino.h>
 
 FixedRam<Task> Task::ramBase = FixedRam<Task>("Task", 1024);
+std::vector<Task *> Tasks = std::vector<Task *>();
 
 
 Task::Task() {
+}
+
+void Task::Start() {
+	started = true;
 }
 
 void Task::DeleteAll() {
 	ramBase.Reset();
 }
 
-
+bool Task::Process() {
+	if (!started) Start();
+	return false;
+}
 
 TaskOpen::TaskOpen(unsigned ipin, float secs) {
 	pin = ipin;
@@ -20,17 +28,18 @@ TaskOpen::TaskOpen(unsigned ipin, float secs) {
 }
 
 void TaskOpen::Start() {
+	Task::Start();
 	const int sz = 40;
 	char buffer[sz];
 	snprintf(buffer, sz, "Open:Start:%d", pin);
 	webLog.println(buffer);
-
 	startTime = millis();
 	digitalWrite(pin, LOW);
 
 }
 
 bool TaskOpen::Process() {
+	Task::Process();
 	if ((millis() - startTime) > length) {
 		return false;
 	}
@@ -53,6 +62,7 @@ void TaskWait::End() {
 }
 
 void TaskWait::Start() {
+	Task::Start();
 	startTime = millis();
 }
 
@@ -71,6 +81,7 @@ void TaskOpenBuzz::Start() {
 }
 
 bool TaskOpenBuzz::Process() {
+	TaskOpen::Process();
 	unsigned long diff = (millis() - startTime);
 
 	if ((diff >= buzzStart) && (diff <= buzzEnd)) {
@@ -110,6 +121,7 @@ void TaskSetState::Start() {
 }
 
 bool TaskSetState::Process() {
+	Task::Process();
 	return false;
 }
 
@@ -125,7 +137,7 @@ TaskLogMsg::TaskLogMsg() {
 	buffer[0] = 0;
 }
 
-TaskLogMsg::TaskLogMsg(const char *msg) {
+TaskLogMsg::TaskLogMsg(const char *msg) : Task() {
 	strncpy(buffer, msg, 80);
 }
 
@@ -134,13 +146,13 @@ void TaskLogMsg::Start() { 	}
 void TaskLogMsg::End() { }
 
 bool TaskLogMsg::Process() {
+	Task::Process();
 	webLog.println(buffer);
 	return false;
 }
 
 
 /******************** BBB *******************
-
 */
 
 

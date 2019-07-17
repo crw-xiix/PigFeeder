@@ -10,13 +10,13 @@ void* SpecTask::operator new(size_t size) {
 	return ramBase.allocate(size);
 }
 
-//Format:  14.25 (2:15pm), [0/1], [0/1],.......the rest.........
+//Format:  14.25 (2:15pm), [0/1], [0/1] |.......the rest.........
 bool SpecTask::ParseTime(const char *str, float* itime, char *irest) {
 	//Will need to know those things, so.........
 	//Lets do it to it.
 	int isunrise = 0;
 	int isunset = 0;
-	int result = sscanf(str, "%f,%d,%d,%80[^\n]", itime, &isunrise, &isunset, irest);
+	int result = sscanf(str, "%f,%d,%d|%80[^\n]", itime, &isunrise, &isunset, irest);
 	if (result != 4) {
 		webLog.It(0, "Invalid info on Parse Command:");
 		webLog.It(0, str);
@@ -34,19 +34,21 @@ bool SpecTask::ParseTime(const char *str, float* itime, char *irest) {
 ScheduleObject *SpecOpenDoor::Create(const char *vals) {
 	float timeOfDay;
 	char buffer[80];
-	int seconds;
+	float seconds;
+
+	if (!ParseTime(vals, &timeOfDay, buffer)) {
+		return NULL;
+	}
 
 	//Will need to know those things, so.........
 	//Lets do it to it.
 	ScheduleObject *scho = new ScheduleObject();
 	if (!scho) return NULL;
-	if (!ParseTime(vals, &timeOfDay, buffer)) {
-		return SpecLogText::Create("0,0,0,Error: Open Door");
-	}
-	sscanf(buffer, "%d", &seconds);
+	sscanf(buffer, "%f", &seconds);
 	scho->timeOfDay = timeOfDay;
-	scho->specTask = new SpecOpenDoor(seconds * 1000ul);
-
+	scho->specTask = new SpecOpenDoor(seconds);
+	sprintf(buffer, "OpenDoor:%f secs", seconds);
+	webLog.println(buffer);
 	//Door is left open, that's not stately
 	scho->stately = false;
 	return scho;
@@ -54,7 +56,7 @@ ScheduleObject *SpecOpenDoor::Create(const char *vals) {
 
 
 
-SpecOpenDoor::SpecOpenDoor(unsigned long secs) {
+SpecOpenDoor::SpecOpenDoor(float secs) {
 	//Now technically, we know what our Door Pin is.......
 	task = new TaskOpen(PIN_DOOR_OPEN, secs);
 	name = "Open Door";
@@ -63,7 +65,7 @@ SpecOpenDoor::SpecOpenDoor(unsigned long secs) {
 
 
 
-SpecCloseDoor::SpecCloseDoor(unsigned long secs) {
+SpecCloseDoor::SpecCloseDoor(float secs) {
 	task = new TaskOpen(PIN_DOOR_CLOSE, secs);
 	name = "Close Door";
 }
@@ -71,19 +73,18 @@ SpecCloseDoor::SpecCloseDoor(unsigned long secs) {
 ScheduleObject *SpecCloseDoor::Create(const char *vals) {
 	float timeOfDay;
 	char buffer[80];
-	int seconds;
+	float seconds;
+	if (!ParseTime(vals, &timeOfDay, buffer)) {
+		return NULL;
+	}
 
 	//Will need to know those things, so.........
 	//Lets do it to it.
 	ScheduleObject *scho = new ScheduleObject();
 	if (!scho) return NULL;
-
-	if (!ParseTime(vals, &timeOfDay, buffer)) {
-		return SpecLogText::Create("0,0,0,Error: Close Door");
-	}
-	sscanf(buffer, "%d", &seconds);
+	sscanf(buffer, "%f", &seconds);
 	scho->timeOfDay = timeOfDay;
-	scho->specTask = new SpecCloseDoor(seconds * 1000ul);
+	scho->specTask = new SpecCloseDoor(seconds);
 	//Door is left open, that's not stately
 	scho->stately = false;
 	return scho;
@@ -123,15 +124,14 @@ SpecLightOff::SpecLightOff() {
 ScheduleObject *SpecLightOff::Create(const char *vals) {
 	float timeOfDay;
 	char buffer[80];
+	if (!ParseTime(vals, &timeOfDay, buffer)) {
+		return NULL;
+	}
 
 	//Will need to know those things, so.........
 	//Lets do it to it.
 	ScheduleObject *scho = new ScheduleObject();
 	if (!scho) return NULL;
-
-	if (!ParseTime(vals, &timeOfDay, buffer)) {
-		return SpecLogText::Create("0,0,0,Error: Light Off");
-	}
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecLightOff();
 	//Light is on from off, that's not stately
@@ -150,18 +150,66 @@ ScheduleObject *SpecLogText::Create(const char *vals) {
 	char buffer[80];
 	//Will need to know those things, so.........
 	//Lets do it to it.
+	if (!ParseTime(vals, &timeOfDay, buffer)) {
+		return NULL;
+	}
+
 	ScheduleObject *scho = new ScheduleObject();
 	if (!scho) return NULL;
-
-
-
-	if (!ParseTime(vals, &timeOfDay, buffer)) {
-		return SpecLogText::Create("0,0,0,Error: Log Msg");
-	}
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecLogText(buffer);
 	//This is harmless, so we want it to execute on restart......
 	scho->stately = false;
+	return scho;
+}
+
+/******************   SpecOpenBuzz ********************/
+SpecOpenBuzz::SpecOpenBuzz(float secs, float bstart, float bend) {
+	task = new TaskOpenBuzz(OutArmExtend, OutShaker, secs, bstart, bend);
+//	Tasks.push_back(new TaskOpenBuzz(OutArmRetract, OutShaker, 21.0, 9.0, 13.0));
+	name = "OpenBuzz";
+}
+
+ScheduleObject* SpecOpenBuzz::Create(const char *vals) {
+	float timeOfDay;
+	char buffer[80];
+	float seconds, bstart, bend;
+	if (!ParseTime(vals, &timeOfDay, buffer)) {
+		return NULL;
+	}
+	if (sscanf(buffer, "%f,%f,%f", &seconds, &bstart, &bend) != 3) return NULL;
+
+	ScheduleObject *scho = new ScheduleObject();
+	if (!scho) return NULL;
+	
+	scho->timeOfDay = timeOfDay;
+	scho->specTask = new SpecOpenBuzz(seconds,bstart,bend);
+	//Door is left open, that's not stately
+	scho->stately = true;
+	return scho;
+}
+
+/******************   SpecCloseBuzz ********************/
+SpecCloseBuzz::SpecCloseBuzz(float secs, float bstart, float bend) {
+	task = new TaskOpenBuzz(OutArmRetract, OutShaker, secs, bstart, bend);
+	name = "CloseBuzz";
+}
+
+ScheduleObject* SpecCloseBuzz::Create(const char *vals) {
+	float timeOfDay;
+	char buffer[80];
+	float seconds, bstart, bend;
+	if (!ParseTime(vals, &timeOfDay, buffer)) {
+		return NULL;
+	}
+	if (sscanf(buffer, "%f,%f,%f", &seconds, &bstart, &bend) != 3) return NULL;
+
+	ScheduleObject *scho = new ScheduleObject();
+	if (!scho) return NULL;
+
+	scho->timeOfDay = timeOfDay;
+	scho->specTask = new SpecCloseBuzz(seconds, bstart, bend);
+	scho->stately = true;
 	return scho;
 }
 
@@ -172,9 +220,12 @@ SpecTaskClass ourTasks[] = {
 	{&SpecLightOn::Create,SpecLightOn::TaskId,"Light On"},
 	{&SpecLightOn::Create,SpecLightOff::TaskId,"Light Off"},
 	{&SpecLogText::Create,SpecLogText::TaskId, "Log Message"},
+	{&SpecOpenBuzz::Create,SpecOpenBuzz::TaskId, "FeedTubeOpenBuzz"},
+	{&SpecCloseBuzz::Create,SpecCloseBuzz::TaskId, "FeedTubeCloseBuzz"},
 	//End it with a null, better that way
 	{NULL, 0}
 };
+
 
 FixedRam<SpecTask> SpecTask::ramBase = FixedRam<SpecTask>("SpecTask", 1024);
 

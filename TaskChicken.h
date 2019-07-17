@@ -38,7 +38,7 @@ public:
 
 class SpecOpenDoor : public SpecTask {
 private:
-	SpecOpenDoor(unsigned long secs);
+	SpecOpenDoor(float secs);
 	SpecOpenDoor() = default;
 public:
 	static ScheduleObject* Create(const char *vals);
@@ -47,7 +47,7 @@ public:
 
 class SpecCloseDoor : SpecTask {
 private:
-	SpecCloseDoor(unsigned long secs);
+	SpecCloseDoor(float secs);
 	SpecCloseDoor() = default;
 public:
 	static ScheduleObject* Create(const char *vals);
@@ -80,6 +80,21 @@ public:
 	static const int TaskId = 5;
 };
 
+class SpecOpenBuzz : SpecTask {
+	SpecOpenBuzz(float secs, float bstart, float bed);
+	SpecOpenBuzz() = default;
+public:
+	static ScheduleObject* Create(const char *vals);
+	static const int TaskId = 6;
+};
+
+class SpecCloseBuzz : SpecTask {
+	SpecCloseBuzz(float secs, float bstart, float bed);
+	SpecCloseBuzz() = default;
+public:
+	static ScheduleObject* Create(const char *vals);
+	static const int TaskId = 7;
+};
 
 
 #endif

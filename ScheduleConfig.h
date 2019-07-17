@@ -23,6 +23,10 @@ public:
 	//If no time server, it can be adjusted manually.
 	float Sunrise = 6.0f;
 	float Sunset = 18.0f;
+	float extraFloats[8] = { 0,0,0,0,0,0,0,0 };
+	uint8_t extraBytes[8] = { 0,0,0,0,0,0,0,0 };
+	int	extraInts[8] = { 0,0,0,0,0,0,0,0 };
+
 	inline const char *Get(int loc) {
 		if (loc < 0) return "";
 		if (loc >= 20) return "";
@@ -30,7 +34,8 @@ public:
 		return elements[loc];
 	}
 	inline void ClearSchedule() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 21; i++) {
+			memset(elements[i], 0, 80);
 			elements[i][0] = 0;
 		}
 		sz = 0;
@@ -44,24 +49,12 @@ public:
 	}
 
 	inline unsigned getCRC() {
-		//return crcSlow(std::reinterpretcast<uint8_t*>( this), sizeof(this));
 		return crcSlow(((uint8_t*)this), sizeof(this));
 	}
 
 	ScheduleConfig LoadFromEEPROM();
 	bool SaveToEEPROM();
-
-
-	inline void ResetDefault() {
-		ClearSchedule();
-		Add("5:1.1,0,0,Test Message");
-		Add("5:0.1,0,0,Schedule Startup");
-		Add("5:0.0,1,0,Wake up! It's sunrise; you're burning daylight!");
-		Add("5:0.0,0,1,Sunset Go to bed!");
-		DST = false;
-		strcpy(Title, "New Remote Action Unit");
-		strcpy(Version, "Enter something here");
-	}
+	void ResetDefault();
 };
 
 extern ScheduleConfig sConfig;

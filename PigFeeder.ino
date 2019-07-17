@@ -56,10 +56,7 @@ IPAddress dns2(DEVICE_DNS2);
 
 const char *textHtml = "text/html";
 
-//Task management
-std::vector<Task *> Tasks = std::vector<Task *>();
-Task *curTask = NULL;
-
+//Schedule Management
 std::vector<ScheduleObject*> schedule = std::vector<ScheduleObject*>();
 std::vector<ScheduleObject*>::iterator schedulePtr;
 
@@ -113,6 +110,7 @@ void setup()
 		delay(250);
 	}
 	webLog.println("Wifi Connected");
+	Serial.println("Wifi Connected");
 	SetupOTA(OTAName);
 	
 	netTime.Init(sConfig.DST?(DEVICE_TZ+1):DEVICE_TZ);
@@ -158,12 +156,6 @@ void ReloadSchedule() {
 	SpecTask::DeleteAll();
 	ScheduleObject::DeleteAll();
 	Tasks.clear();
-	//Sorry buddy :)
-	if (curTask) {
-		webLog.println("Deleting left over task in queue.");
-		curTask->End();
-	}
-	curTask = NULL;
 	Task::DeleteAll();
 	webLog.println("Loading schedule");
 	int j = 0;
@@ -203,6 +195,7 @@ void ReloadSchedule() {
 }
 
 //Reads until timeout or terminator or buffer full.  Returns true if all succeed, false if timeout or overrun. It always terminates with /0
+//terminator charaacter IS INCLUDED in the string
 bool readBytesUntil(WiFiClient& client, char* dest, char terminator, int len, unsigned long timeout_ms) {
 	unsigned long start = millis();
 	int pos = 0;
@@ -223,6 +216,7 @@ bool readBytesUntil(WiFiClient& client, char* dest, char terminator, int len, un
 				return false;
 			}
 		}
+		yield();
 	}
 	return false;
 }
@@ -266,12 +260,7 @@ void loop()
 
 	//Now handle our tasks
 	if (Tasks.size() > 0) {
-		auto ttt = Tasks.begin();
-		Task *thisTask = (*ttt);
-		if (thisTask != curTask) {
-			curTask = thisTask;
-			thisTask->Start();
-		}
+		auto thisTask= *(Tasks.begin());
 		bool val = thisTask->Process();
 		if (!val) {
 			thisTask->End();
@@ -281,7 +270,6 @@ void loop()
 				Task::DeleteAll();
 				webLog.It(netTime.getHourFloat(), "Freeing Task Memory");
 			}
-			curTask = NULL;
 		}
 	}
 	
@@ -337,22 +325,22 @@ void loop()
 		}
 		if (strstr(buffer, "/Open")) {
 			webLog.It(netTime.getHourFloat(), "Opening");
-			Tasks.push_back(new TaskOpen(OutArmExtend, 65000));
+			Tasks.push_back(new TaskOpen(OutArmExtend, 65.0));
 			printHeader(client, textHtml);
 			client.println("Open");
 			break;
 		}
 		if (strstr(buffer, "/Close")) {
 			webLog.It(netTime.getHourFloat(), "Closing");
-			Tasks.push_back(new TaskOpen(OutArmRetract, 65000));
+			Tasks.push_back(new TaskOpen(OutArmRetract, 65.0));
 			printHeader(client, textHtml);
 			client.println("Close");
 			break;
 		}
 		if (strstr(buffer, "/Cycle")) {
 			webLog.It(netTime.getHourFloat(), "Cycling");
-			Tasks.push_back(new TaskOpenBuzz(OutArmExtend, OutShaker, 20, 6, 10));
-			Tasks.push_back(new TaskOpenBuzz(OutArmRetract, OutShaker, 21, 9, 13));
+			Tasks.push_back(new TaskOpenBuzz(OutArmExtend, OutShaker, 20.0, 6.0, 10.0));
+			Tasks.push_back(new TaskOpenBuzz(OutArmRetract, OutShaker, 21.0, 9.0, 13.0));
 			printHeader(client, textHtml);
 			client.println("Cycled");
 			break;

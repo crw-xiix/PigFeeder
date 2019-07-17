@@ -78,16 +78,17 @@
         }
         function loadTaskForm(items) {
             for (i = 0; i < items.length; i++) {
-                var st = items[i].task;
-                var objs = st.split(":")
-                var ttask = objs[0];
-                var others = objs[1].split(",",4);
+                var st = items[i].task + ' ';//Just so we have something to split, just in case
+                var postVert = st.split("|");
+                var postColon = postVert[0].split(":");
+                var ttask = postColon[0];
+                var others = postColon[1].split(",");
                 //Now we can set the values on screen
                 $("#task"+i).val(ttask);
                 $("#time" + i).val(others[0]);
                 $("#sunrise" + i).prop('checked', (others[1] != 0));
                 $("#sunset" + i).prop('checked', (others[2] != 0));
-                $("#option" + i).val(others[3]);
+                $("#option" + i).val(postVert[1].trim());
             }
         }
 
@@ -118,9 +119,9 @@
                     t += "0,";
                 }
                 if ($("#sunset" + i).prop('checked')) {
-                    t += "1,";
+                    t += "1|";
                 } else {
-                    t += "0,";
+                    t += "0|";
                 }
                 t += $("#option" + i).val();
                 st += t + "\n";
@@ -162,8 +163,17 @@
             <input type="text" class="form-control" id="DName">
             <label for="DVersion">Device Version:</label>
             <input type="text" class="form-control" id="DVersion">
-            <br/>
+            <br />
             <label class="checkbox-inline"><input type="checkbox" id="DST" value="">Daylight Savings Time</label>
+            <label for="DPassword">Password to save:</label>
+            <input type="text" class="form-control" id="DPassword">
+            <label for="DPassword">Sunrise:</label>
+            <input type="text" class="form-control" id="DSunrise">
+            <label for="DPassword">Sunset:</label>
+            <input type="text" class="form-control" id="DSunset">
+
+
+
         </div>
         <div class="well">
             <h3>Events</h3>
