@@ -37,7 +37,10 @@ public:
 	bool triggerReload = false;
 	bool first = true;
 	bool invalidTime = true;
-
+	inline void setTimeZone(int tz) {
+		timeZone = tz;
+		sendTimeRequest();
+	}
 	NetTime();
 	int month = 1, day = 1, year = 2000;
 	void Init(long iTZ);

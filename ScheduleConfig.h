@@ -3,7 +3,7 @@
 #define __ScheduleConfig_H__ 1
 
 
-#include "TaskChicken.h"
+#include "SpecTask.h"
 #include "crc.h"
 #include <stdint.h>
 #include "WebLog.h"

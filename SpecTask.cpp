@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "TaskChicken.h"
+#include "SpecTask.h"
 #include "pins.h"
 #include "WebLog.h"
 #include "FixedRam.h"
@@ -49,8 +49,7 @@ ScheduleObject *SpecOpenDoor::Create(const char *vals) {
 	scho->specTask = new SpecOpenDoor(seconds);
 	sprintf(buffer, "OpenDoor:%f secs", seconds);
 	webLog.println(buffer);
-	//Door is left open, that's not stately
-	scho->stately = false;
+
 	return scho;
 }
 
@@ -85,8 +84,6 @@ ScheduleObject *SpecCloseDoor::Create(const char *vals) {
 	sscanf(buffer, "%f", &seconds);
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecCloseDoor(seconds);
-	//Door is left open, that's not stately
-	scho->stately = false;
 	return scho;
 }
 
@@ -110,8 +107,6 @@ ScheduleObject *SpecLightOn::Create(const char *vals) {
 	}
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecLightOn();
-	//Light is on from off, that's not stately
-	scho->stately = false;
 	return scho;
 }
 
@@ -134,8 +129,6 @@ ScheduleObject *SpecLightOff::Create(const char *vals) {
 	if (!scho) return NULL;
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecLightOff();
-	//Light is on from off, that's not stately
-	scho->stately = false;
 	return scho;
 }
 
@@ -158,8 +151,7 @@ ScheduleObject *SpecLogText::Create(const char *vals) {
 	if (!scho) return NULL;
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecLogText(buffer);
-	//This is harmless, so we want it to execute on restart......
-	scho->stately = false;
+
 	return scho;
 }
 
@@ -181,11 +173,9 @@ ScheduleObject* SpecOpenBuzz::Create(const char *vals) {
 
 	ScheduleObject *scho = new ScheduleObject();
 	if (!scho) return NULL;
-	
+
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecOpenBuzz(seconds,bstart,bend);
-	//Door is left open, that's not stately
-	scho->stately = true;
 	return scho;
 }
 
@@ -209,7 +199,7 @@ ScheduleObject* SpecCloseBuzz::Create(const char *vals) {
 
 	scho->timeOfDay = timeOfDay;
 	scho->specTask = new SpecCloseBuzz(seconds, bstart, bend);
-	scho->stately = true;
+
 	return scho;
 }
 

@@ -66,6 +66,14 @@ void TaskWait::Start() {
 	startTime = millis();
 }
 
+bool TaskWait::Process() {
+	Task::Process();
+	if ((millis() - startTime) > length) {
+		return false;
+	}
+	return true;
+}
+
 /************************   TaskOpenBuzz     ************************/
 
 TaskOpenBuzz::TaskOpenBuzz(unsigned ipin, unsigned bPin, float secs, float bStart, float bEnd) :TaskOpen(ipin, secs) {

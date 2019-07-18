@@ -1,6 +1,6 @@
 ﻿//Must output the website with no external refs, just plain html...
 //Use % % % (with no spaces) to represent a line converted, it will be repeated
-//Use % % (with no spaces) to define a variable string replacement
+
 
 #include "output.h"
 

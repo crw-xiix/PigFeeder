@@ -134,7 +134,7 @@ void CalcSunriseSunset() {
 	double sunRise = 6;
 	double sunSet = 6;
 	SunSet sun = SunSet();
-	sun.setPosition(DEVICE_LAT, DEVICE_LON, DEVICE_TZ);
+	sun.setPosition(DEVICE_LAT, DEVICE_LON, sConfig.DST ? (DEVICE_TZ + 1) : DEVICE_TZ);
 	sun.setCurrentDate(netTime.year, netTime.month, netTime.day);
 	sunRise = sun.calcSunrise() / 60;
 	sunSet = sun.calcSunset() / 60;
@@ -151,7 +151,6 @@ bool runScheduler = false;
 
 
 void ReloadSchedule() {
-	webLog.println("Clearing schedule");
 	schedule.clear();
 	SpecTask::DeleteAll();
 	ScheduleObject::DeleteAll();
@@ -170,7 +169,6 @@ void ReloadSchedule() {
 	}
 	sort(schedule.begin(), schedule.end(), SchCompare);
 
-	webLog.println("Schedule Load Complete");
 	schedulePtr = schedule.begin();
 	runScheduler = true;
 
@@ -179,13 +177,9 @@ void ReloadSchedule() {
 		ScheduleObject &so = *(*schedulePtr);
 		float ttime = netTime.getHourFloat();
 		if (so.timeOfDay <= netTime.getHourFloat()) {
-			//This event has passed....
-			if (!so.stately) {
-				so.completed = true;
-				Tasks.push_back(so.specTask->task);
-				snprintf(buffer, 80, "Added %2.2f past task: %s", so.timeOfDay, so.specTask->name);
-				webLog.println(buffer);
-			}
+			so.completed = true;
+			snprintf(buffer, 80, "Skipped %2.2f past task: %s", so.timeOfDay, so.specTask->name);
+			webLog.println(buffer);
 		}
 		else {
 			break;

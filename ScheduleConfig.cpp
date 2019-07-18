@@ -4,6 +4,7 @@
 #include "nettime.h"
 
 
+
 ScheduleConfig ScheduleConfig::LoadFromEEPROM() {
 	bool fail = false;
 	uint8_t ecrc = 0;
@@ -52,7 +53,6 @@ bool ScheduleConfig::SaveToEEPROM() {
 		webLog.println("Verified EEPROM data");
 	}
 	EEPROM.end();
-	netTime.triggerReload = true;
 }
 
 void ScheduleConfig::Add(const char *command) {
@@ -63,7 +63,6 @@ void ScheduleConfig::Add(const char *command) {
 
 void ScheduleConfig::ResetDefault() {
 	ClearSchedule();
-	Add("5:1.1,0,0|Test Message");
 	Add("5:0.1,0,0|Schedule Startup");
 	Add("5:0.0,1,0|Wake up! It's sunrise; you're burning daylight!");
 	Add("5:0.0,0,1|Sunset Go to bed!");
@@ -71,8 +70,6 @@ void ScheduleConfig::ResetDefault() {
 	strcpy(Title, "New Remote Action Unit");
 	strcpy(Version, "Enter something here");
 }
-
-
 
 
 ScheduleConfig sConfig = ScheduleConfig();

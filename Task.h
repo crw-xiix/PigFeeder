@@ -19,7 +19,6 @@ public:
 	virtual void End() = 0;
 protected:
 	virtual void Start();
-
 };
 
 class TaskOpen : public Task {

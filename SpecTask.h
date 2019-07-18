@@ -4,8 +4,8 @@
 #include <array>
 #include <iostream>
 
-#ifndef __TaskChicken_H_
-#define __TaskChicken_H_ 1
+#ifndef __SpecTask_H_
+#define __SpecTask_H_ 1
 #include "FixedRam.h"
 
 class ScheduleObject;
@@ -15,9 +15,7 @@ private:
 	static FixedRam<SpecTask> ramBase;
 public:
 	void* operator new(size_t size);
-	bool stately = false;
 	const char *name;
-	//	static const int TaskId = 0;  //No task here
 	float timeOfDay = 0.0f;
 	Task *task = NULL;
 	static inline float rangeInF(float val, float min,  float max) {

@@ -1,6 +1,6 @@
 #pragma once
 #include "FixedRam.h"
-#include "TaskChicken.h"
+#include "SpecTask.h"
 
 
 class ScheduleObject {
