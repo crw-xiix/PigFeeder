@@ -83,11 +83,8 @@ void setup()
 	digitalWrite(OutShaker, HIGH);
 	digitalWrite(OutAux, HIGH);
 
-	
-	
 	Tasks.reserve(20);
 	schedule.reserve(25);
-	
 
 	sConfig = sConfig.LoadFromEEPROM();
 	Serial.println("Starting Wifi");
@@ -102,6 +99,7 @@ void setup()
 	WiFi.begin(wifiNetwork, wifiPassword);
 	webLog.println("Wifi Begin");
 	Serial.println("Wifi Begin");
+
 	//Do a little flashy dance while we connect
 	while (WiFi.status() != WL_CONNECTED) {
 		digitalWrite(D4, LOW);
@@ -120,7 +118,6 @@ void setup()
 	// Start the server
 	server.begin();
 	Serial.println("Setup over");
-
 }
 
 //A fucked up pointer because Arduino is fucked up sometimes.
@@ -227,6 +224,7 @@ void loop()
 	//for OTA stuff.........
 	ArduinoOTA.handle();
 	netTime.process();
+
 	
 	if (runScheduler && (schedulePtr != schedule.end())) {
 		ScheduleObject &so = *(*schedulePtr);

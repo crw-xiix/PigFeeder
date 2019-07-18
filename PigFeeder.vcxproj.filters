@@ -58,9 +58,6 @@
     <ClInclude Include="ScheduleConfig.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TaskChicken.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="outputEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -74,6 +71,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PostMessage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpecTask.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -104,9 +104,6 @@
     <ClCompile Include="crc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaskChicken.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ScheduleConfig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -120,6 +117,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PostMessage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpecTask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -127,7 +127,7 @@
     <ClInclude Include="ScheduleConfig.h" />
     <ClInclude Include="ScheduleObject.h" />
     <ClInclude Include="Task.h" />
-    <ClInclude Include="TaskChicken.h" />
+    <ClInclude Include="SpecTask.h" />
     <ClInclude Include="__vm\.PigFeeder.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +147,7 @@
     <ClCompile Include="ScheduleConfig.cpp" />
     <ClCompile Include="ScheduleObject.cpp" />
     <ClCompile Include="Task.cpp" />
-    <ClCompile Include="TaskChicken.cpp" />
+    <ClCompile Include="SpecTask.cpp" />
     <ClCompile Include="WebLog.cpp" />
   </ItemGroup>
   <PropertyGroup>
