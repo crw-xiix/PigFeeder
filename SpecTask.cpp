@@ -205,13 +205,13 @@ ScheduleObject* SpecCloseBuzz::Create(const char *vals) {
 
 
 SpecTaskClass ourTasks[] = {
-	{&SpecOpenDoor::Create,SpecOpenDoor::TaskId,"Open Door"},
-	{&SpecCloseDoor::Create,SpecCloseDoor::TaskId,"Close Door"},
-	{&SpecLightOn::Create,SpecLightOn::TaskId,"Light On"},
-	{&SpecLightOn::Create,SpecLightOff::TaskId,"Light Off"},
-	{&SpecLogText::Create,SpecLogText::TaskId, "Log Message"},
-	{&SpecOpenBuzz::Create,SpecOpenBuzz::TaskId, "FeedTubeOpenBuzz"},
-	{&SpecCloseBuzz::Create,SpecCloseBuzz::TaskId, "FeedTubeCloseBuzz"},
+	{&SpecOpenDoor::Create,SpecOpenDoor::TaskId,"Open Door", "(Seconds to Open)"},
+	{&SpecCloseDoor::Create,SpecCloseDoor::TaskId,"Close Door", "(Seconds to Close)"},
+	{&SpecLightOn::Create,SpecLightOn::TaskId,"Light On",""},
+	{&SpecLightOn::Create,SpecLightOff::TaskId,"Light Off",""},
+	{&SpecLogText::Create,SpecLogText::TaskId, "Log Message","Message to show"},
+	{&SpecOpenBuzz::Create,SpecOpenBuzz::TaskId, "FeedTubeOpenBuzz","(Duration:secs),BuzzStart:secs,BuzzEnd:secs"},
+	{&SpecCloseBuzz::Create,SpecCloseBuzz::TaskId, "FeedTubeCloseBuzz","(Duration:secs),BuzzStart:secs,BuzzEnd:secs"},
 	//End it with a null, better that way
 	{NULL, 0}
 };

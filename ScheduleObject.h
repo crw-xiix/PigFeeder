@@ -25,6 +25,7 @@ struct SpecTaskClass {
 	std::function<ScheduleObject*(const char*)> func;
 	int Id;
 	const char *name;
+	const char *help;
 };
 
 //This is to be filled in after classes are created

@@ -216,6 +216,8 @@ bool readBytesUntil(WiFiClient& client, char* dest, char terminator, int len, un
 void printHeader(WiFiClient& client, const char *ctype);
 
 int requestNo = 0;
+
+
 // Add the main program code into the continuous loop() function
 unsigned long togMillis = 0;
 void loop()
@@ -322,6 +324,11 @@ void loop()
 			client.println("Open");
 			break;
 		}
+		if (strstr(buffer, "/Reboot")) {
+			ESP.restart();
+			break;
+		}
+
 		if (strstr(buffer, "/Close")) {
 			webLog.It(netTime.getHourFloat(), "Closing");
 			Tasks.push_back(new TaskOpen(OutArmRetract, 65.0));

@@ -1,6 +1,6 @@
 //Must output the website with no external refs, just plain html...
 //Use % % % (with no spaces) to represent a line converted, it will be repeated
-//Use % % (with no spaces) to define a variable string replacement
+
 
 #include "output.h"
 
@@ -58,6 +58,10 @@ void outputSite(void (*printFunction)(const char *) ) {
 	printFunction("            });");
 	printFunction("        }");
 	printFunction("");
+	printFunction("        function reboot() {");
+	printFunction("            $.get(\"/Reboot\", function (data) {");
+	printFunction("            });");
+	printFunction("        }");
 	printFunction("        $(document).ready(function () {");
 	printFunction("            $(\"#bCycle\").click(cycleButton);");
 	printFunction("            $(\"#bOpen\").click(openButton);");
@@ -65,6 +69,7 @@ void outputSite(void (*printFunction)(const char *) ) {
 	printFunction("            $(\"#bDance\").click(danceButton);");
 	printFunction("            $(\"#bAuxOn\").click(auxOn);");
 	printFunction("            $(\"#bAuxOff\").click(auxOff);");
+	printFunction("            $(\"#bReboot\").click(reboot);");
 	printFunction("            refresh();");
 	printFunction("            setInterval(refresh, 3000);");
 	printFunction("        });");
@@ -102,6 +107,7 @@ void outputSite(void (*printFunction)(const char *) ) {
 	printFunction("                    <button type=\"button\" class=\"btn btn-warning\" id=\"bAuxOff\">Aux Off</button>");
 	printFunction("                </div>");
 	printFunction("                <div class=\"col\">");
+	printFunction("                    <button type=\"button\" class=\"btn btn-warning\" id=\"bReboot\">Reboot</button>");
 	printFunction("                </div>");
 	printFunction("                <div class=\"col\">");
 	printFunction("                    <a href=\"/Edit\" class=\"btn btn-info\">Edit Config</a>");

@@ -51,6 +51,10 @@
             });
         }
 
+        function reboot() {
+            $.get("/Reboot", function (data) {
+            });
+        }
         $(document).ready(function () {
             $("#bCycle").click(cycleButton);
             $("#bOpen").click(openButton);
@@ -58,6 +62,7 @@
             $("#bDance").click(danceButton);
             $("#bAuxOn").click(auxOn);
             $("#bAuxOff").click(auxOff);
+            $("#bReboot").click(reboot);
             refresh();
             setInterval(refresh, 3000);
         });
@@ -95,6 +100,7 @@
                     <button type="button" class="btn btn-warning" id="bAuxOff">Aux Off</button>
                 </div>
                 <div class="col">
+                    <button type="button" class="btn btn-warning" id="bReboot">Reboot</button>
                 </div>
                 <div class="col">
                     <a href="/Edit" class="btn btn-info">Edit Config</a>
