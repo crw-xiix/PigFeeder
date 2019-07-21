@@ -322,7 +322,7 @@ void loop()
 		}
 		if (strstr(buffer, "/Open")) {
 			webLog.It(netTime.getHourFloat(), "Opening");
-			Tasks.push_back(new TaskOpen(OutArmExtend, 65.0));
+			Tasks.push_back(new TaskOpen(OutArmExtend, 8.0));
 			printHeader(client, textHtml);
 			client.println("Open");
 			break;
@@ -334,7 +334,7 @@ void loop()
 
 		if (strstr(buffer, "/Close")) {
 			webLog.It(netTime.getHourFloat(), "Closing");
-			Tasks.push_back(new TaskOpen(OutArmRetract, 65.0));
+			Tasks.push_back(new TaskOpen(OutArmRetract, 21.0));
 			printHeader(client, textHtml);
 			client.println("Close");
 			break;
