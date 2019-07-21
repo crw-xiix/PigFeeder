@@ -315,6 +315,9 @@ void loop()
 			handlePost(client);
 			printHeader(client, textHtml);
 			client.println("Config Set");
+			webLog.It(netTime.getHourFloat(), "Triggering Schedule Reload");
+			
+			netTime.triggerReload = true;
 			break;
 		}
 		if (strstr(buffer, "/Open")) {
